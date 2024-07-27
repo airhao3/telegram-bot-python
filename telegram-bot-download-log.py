@@ -9,13 +9,11 @@ import concurrent.futures
 import time
 import sys
 import asyncio
-import httpx
 
 # 加载.env文件中的环境变量
 load_dotenv()
 
 # 将环境变量中的token赋值给TOKEN
-#TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TOKEN = '6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg'
 
 # 设置下载目录
@@ -23,12 +21,9 @@ DOWNLOAD_DIR = 'downloads'
 if not os.path.exists(DOWNLOAD_DIR):
     os.makedirs(DOWNLOAD_DIR)
 
-# 设置代理地址（根据你的实际代理地址进行修改）
-PROXY = 'socks5://127.0.0.1:18888'
-
 # 配置日志记录
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,  # 将日志级别改为DEBUG以获取更详细的信息
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
         logging.FileHandler("bot.log"),
@@ -67,8 +62,10 @@ async def progress_hook(d, update: Update, context: ContextTypes.DEFAULT_TYPE):
         percent = d['_percent_str']
         speed = d['_speed_str']
         eta = d['_eta_str']
+        logger.debug(f"Download progress: {percent} complete, Speed: {speed}, ETA: {eta}")
         await update.message.edit_text(f"Downloading: {percent} complete\nSpeed: {speed}\nETA: {eta}")
     elif d['status'] == 'finished':
+        logger.info("Download finished, processing...")
         await update.message.edit_text("Download finished. Processing...")
 
 async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT_TYPE, max_retries=3):
@@ -86,7 +83,7 @@ async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT
                 }],
                 'logger': logger,
                 'progress_hooks': [lambda d: asyncio.run_coroutine_threadsafe(progress_hook(d, update, context), asyncio.get_event_loop())],
-                'proxy': PROXY,
+                # 移除代理设置
             }
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(url, download=True)
@@ -130,19 +127,14 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         logger.warning(f"User {user.id} ({user.username}) sent invalid URL: {message_text}")
         await update.message.reply_text("This is not a valid URL. Please send a video URL.")
 
-
 def main() -> None:
     """Start the bot."""
     logger.info("Starting the bot")
     
-    # 使用代理创建 Application
+    # 创建 Application，不使用代理
     application = (
         Application.builder()
         .token(TOKEN)
-        .http_version("1.1")
-        .get_updates_http_version("1.1")
-        .proxy(httpx.Proxy(PROXY))
-        #.timeout(60.0)  # 增加超时时间
         .build()
     )
     

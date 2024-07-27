@@ -29,7 +29,6 @@ load_dotenv()
 
 # 从环境变量中获取 Telegram bot 的 Token
 TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
-
 # Enable logging
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO

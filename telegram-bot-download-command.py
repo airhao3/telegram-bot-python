@@ -3,32 +3,32 @@ import re
 import os
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
-import yt_dlp
 from dotenv import load_dotenv
 import concurrent.futures
 import time
 import sys
 import asyncio
-import httpx
+import subprocess
 
 # 加载.env文件中的环境变量
 load_dotenv()
 
 # 将环境变量中的token赋值给TOKEN
-#TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TOKEN = '6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg'
 
 # 设置下载目录
 DOWNLOAD_DIR = 'downloads'
+SUBTITLE_DIR = os.path.join(DOWNLOAD_DIR, 'subtitles')
+
 if not os.path.exists(DOWNLOAD_DIR):
     os.makedirs(DOWNLOAD_DIR)
+if not os.path.exists(SUBTITLE_DIR):
+    os.makedirs(SUBTITLE_DIR)
 
-# 设置代理地址（根据你的实际代理地址进行修改）
-PROXY = 'socks5://127.0.0.1:18888'
 
 # 配置日志记录
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
         logging.FileHandler("bot.log"),
@@ -62,44 +62,73 @@ def is_url(text):
     )
     return bool(url_pattern.match(text))
 
-async def progress_hook(d, update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if d['status'] == 'downloading':
-        percent = d['_percent_str']
-        speed = d['_speed_str']
-        eta = d['_eta_str']
-        await update.message.edit_text(f"Downloading: {percent} complete\nSpeed: {speed}\nETA: {eta}")
-    elif d['status'] == 'finished':
-        await update.message.edit_text("Download finished. Processing...")
-
 async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT_TYPE, max_retries=3):
-    """Download the video from the provided URL with retries."""
+    """Download video, audio, and subtitles, then merge them."""
     for attempt in range(max_retries):
         try:
             logger.info(f"Starting download attempt {attempt + 1} for URL: {url}")
-            ydl_opts = {
-                'outtmpl': os.path.join(DOWNLOAD_DIR, '%(title)s.%(ext)s'),
-                'format': 'bestaudio/best',
-                'postprocessors': [{
-                    'key': 'FFmpegExtractAudio',
-                    'preferredcodec': 'mp3',
-                    'preferredquality': '192',
-                }],
-                'logger': logger,
-                'progress_hooks': [lambda d: asyncio.run_coroutine_threadsafe(progress_hook(d, update, context), asyncio.get_event_loop())],
-                'proxy': PROXY,
-            }
-            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                info = ydl.extract_info(url, download=True)
-                filename = ydl.prepare_filename(info)
-                filename = os.path.splitext(filename)[0] + '.mp3'  # Change extension to mp3
-            logger.info(f"Download completed successfully: {filename}")
-            return filename
+            
+            # 构建yt-dlp命令
+            command = [
+                'yt-dlp',
+                '--write-sub',  # 下载字幕
+                '--sub-lang', 'en',  # 下载英文字幕，可以根据需要修改
+                '--convert-subs', 'srt',  # 转换字幕为srt格式
+                '--write-auto-sub',  # 如果没有字幕，下载自动生成的字幕
+                '-f', 'bestvideo+bestaudio/best',  # 下载最佳质量的视频和音频
+                '-o', f'{DOWNLOAD_DIR}/%(title)s.%(ext)s',
+                '--merge-output-format', 'mp4',  # 合并为mp4格式
+                url
+            ]
+            
+            # 执行命令并捕获输出
+            process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+            
+            # 实时处理输出
+            while True:
+                output = process.stdout.readline()
+                if output == '' and process.poll() is not None:
+                    break
+                if output:
+                    logger.debug(output.strip())
+                    # 更新下载进度
+                    if "[download]" in output:
+                        await update.message.edit_text(f"Downloading: {output.strip()}")
+            
+            # 检查是否有错误
+            if process.returncode != 0:
+                error = process.stderr.read()
+                logger.error(f"yt-dlp error: {error}")
+                raise Exception(f"yt-dlp failed with error: {error}")
+            
+            # 找到下载的文件
+            video_file = None
+            subtitle_file = None
+            for file in os.listdir(DOWNLOAD_DIR):
+                if file.endswith(".mp4"):
+                    video_file = os.path.join(DOWNLOAD_DIR, file)
+                elif file.endswith(".srt"):
+                    subtitle_file = os.path.join(DOWNLOAD_DIR, file)
+                    # 移动字幕文件到字幕文件夹
+                    new_subtitle_path = os.path.join(SUBTITLE_DIR, file)
+                    os.rename(subtitle_file, new_subtitle_path)
+                    subtitle_file = new_subtitle_path
+            
+            if not video_file:
+                raise Exception("Downloaded video file not found")
+            
+            logger.info(f"Download completed successfully: {video_file}")
+            if subtitle_file:
+                logger.info(f"Subtitle file: {subtitle_file}")
+            
+            return video_file, subtitle_file
+        
         except Exception as e:
             logger.error(f"Download attempt {attempt + 1} failed: {str(e)}")
             if attempt == max_retries - 1:
                 raise
             logger.info(f"Waiting 5 seconds before retry...")
-            time.sleep(5)  # Wait for 5 seconds before retrying
+            await asyncio.sleep(5)  # Wait for 5 seconds before retrying
 
 async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Handle video download request."""
@@ -110,19 +139,23 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         status_message = await update.message.reply_text("Starting download. Please wait...")
         try:
             logger.info(f"Starting download process for URL: {message_text}")
-            loop = asyncio.get_event_loop()
-            filename = await loop.run_in_executor(executor, download_video_task, message_text, update, context)
+            # 修改这一行
+            video_file, subtitle_file = await download_video_task(message_text, update, context)
             
-            logger.info(f"Sending file to user: {filename}")
-            # Send the downloaded file
-            await update.message.reply_document(document=open(filename, 'rb'))
+            logger.info(f"Sending video file to user: {video_file}")
+            await update.message.reply_document(document=open(video_file, 'rb'))
             
-            logger.info(f"Deleting file: {filename}")
-            # Delete the file after sending
-            os.remove(filename)
+            if subtitle_file:
+                logger.info(f"Sending subtitle file to user: {subtitle_file}")
+                await update.message.reply_document(document=open(subtitle_file, 'rb'))
+            
+            logger.info(f"Deleting files: {video_file}, {subtitle_file}")
+            os.remove(video_file)
+            if subtitle_file:
+                os.remove(subtitle_file)
             
             logger.info("Download and send process completed successfully")
-            await status_message.edit_text("Download completed and file sent!")
+            await status_message.edit_text("Download completed and files sent!")
         except Exception as e:
             logger.error(f"Failed to download: {str(e)}")
             await status_message.edit_text(f"Failed to download. Please try again later.")
@@ -130,19 +163,14 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         logger.warning(f"User {user.id} ({user.username}) sent invalid URL: {message_text}")
         await update.message.reply_text("This is not a valid URL. Please send a video URL.")
 
-
 def main() -> None:
     """Start the bot."""
     logger.info("Starting the bot")
     
-    # 使用代理创建 Application
+    # 创建 Application，不使用代理
     application = (
         Application.builder()
         .token(TOKEN)
-        .http_version("1.1")
-        .get_updates_http_version("1.1")
-        .proxy(httpx.Proxy(PROXY))
-        #.timeout(60.0)  # 增加超时时间
         .build()
     )
     
