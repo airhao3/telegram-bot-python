@@ -15,7 +15,6 @@ import json
 load_dotenv()
 
 # 将环境变量中的token赋值给TOKEN
-TOKEN = '6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg'
 
 # 设置下载目录
 DOWNLOAD_DIR = 'downloads'
