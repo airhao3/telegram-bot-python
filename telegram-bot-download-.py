@@ -1,3 +1,5 @@
+## 更新使用uuid标记当前的下载文件名称， 并使用uuid直接查找文件发送，
+## 取消发送之后删除的功能，保留下载内容在服务器。
 import logging
 import re
 import os
@@ -10,6 +12,7 @@ import sys
 import asyncio
 import subprocess
 import datetime
+import uuid
 
 # 加载.env文件中的环境变量
 load_dotenv()
@@ -124,9 +127,9 @@ async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT
             if not video_file:
                 raise Exception("Downloaded video file not found")
 
-            # 使用时间戳重命名文件以确保唯一性
-            timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-            new_video_file = os.path.join(DOWNLOAD_DIR, f"{timestamp}_{os.path.basename(video_file)}")
+            # 使用UUID重命名文件以确保唯一性
+            unique_id = str(uuid.uuid4())
+            new_video_file = os.path.join(DOWNLOAD_DIR, f"{unique_id}_{os.path.basename(video_file)}")
             os.rename(video_file, new_video_file)
             video_file = new_video_file
 
@@ -171,14 +174,6 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
                     logger.info(f"Sending subtitle file to user: {subtitle_file}")
                     with open(subtitle_file, 'rb') as subtitle:
                         await update.message.reply_document(document=subtitle)
-
-            logger.info(f"Deleting files: {video_file}, {subtitle_file}")
-            try:
-                os.remove(video_file)
-                if subtitle_file and os.path.exists(subtitle_file):
-                    os.remove(subtitle_file)
-            except OSError as e:
-                logger.error(f"Error deleting files: {e}")
 
             logger.info("Download and send process completed successfully")
             await status_message.edit_text("Download completed and files sent!")
