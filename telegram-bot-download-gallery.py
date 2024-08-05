@@ -9,6 +9,7 @@ import time
 import sys
 import asyncio
 import subprocess
+import json
 
 # 加载.env文件中的环境变量
 load_dotenv()
@@ -24,7 +25,6 @@ if not os.path.exists(DOWNLOAD_DIR):
     os.makedirs(DOWNLOAD_DIR)
 if not os.path.exists(SUBTITLE_DIR):
     os.makedirs(SUBTITLE_DIR)
-
 
 # 配置日志记录
 logging.basicConfig(
@@ -63,27 +63,28 @@ def is_url(text):
     return bool(url_pattern.match(text))
 
 async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT_TYPE, max_retries=3):
-    """Download video, audio, and subtitles, then merge them."""
+    """Download video, audio, and subtitles using gallery-dl."""
     for attempt in range(max_retries):
         try:
             logger.info(f"Starting download attempt {attempt + 1} for URL: {url}")
-            
-            # 构建yt-dlp命令
+
+            # 构建gallery-dl命令
             command = [
-                'yt-dlp',
-                '--write-sub',  # 下载字幕
-                '--sub-lang', 'en',  # 下载英文字幕，可以根据需要修改
-                '--convert-subs', 'srt',  # 转换字幕为srt格式
-                '--write-auto-sub',  # 如果没有字幕，下载自动生成的字幕
-                '-f', 'bestvideo+bestaudio/best',  # 下载最佳质量的视频和音频
-                '-o', f'{DOWNLOAD_DIR}/%(title)s.%(ext)s',
-                '--merge-output-format', 'mp4',  # 合并为mp4格式
+                'gallery-dl',
+                '-v',  # 详细输出
+                '--write-metadata',  # 写入元数据
+                '--write-info-json',  # 写入info.json
+                '-D', DOWNLOAD_DIR,  # 设置下载目录
+                '--exec', 'mv {} {}'.format(
+                    os.path.join(DOWNLOAD_DIR, '*.srt'),
+                    SUBTITLE_DIR
+                ),  # 移动字幕文件到字幕目录
                 url
             ]
-            
+
             # 执行命令并捕获输出
             process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
-            
+
             # 实时处理输出
             while True:
                 output = process.stdout.readline()
@@ -92,37 +93,36 @@ async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT
                 if output:
                     logger.debug(output.strip())
                     # 更新下载进度
-                    if "[download]" in output:
-                        await update.message.edit_text(f"Downloading: {output.strip()}")
-            
+                    await update.message.edit_text(f"Downloading: {output.strip()}")
+
             # 检查是否有错误
             if process.returncode != 0:
                 error = process.stderr.read()
-                logger.error(f"yt-dlp error: {error}")
-                raise Exception(f"yt-dlp failed with error: {error}")
-            
+                logger.error(f"gallery-dl error: {error}")
+                raise Exception(f"gallery-dl failed with error: {error}")
+
             # 找到下载的文件
             video_file = None
             subtitle_file = None
             for file in os.listdir(DOWNLOAD_DIR):
-                if file.endswith(".mp4"):
+                if file.endswith((".mp4", ".webm", ".mkv")):
                     video_file = os.path.join(DOWNLOAD_DIR, file)
-                elif file.endswith(".srt"):
-                    subtitle_file = os.path.join(DOWNLOAD_DIR, file)
-                    # 移动字幕文件到字幕文件夹
-                    new_subtitle_path = os.path.join(SUBTITLE_DIR, file)
-                    os.rename(subtitle_file, new_subtitle_path)
-                    subtitle_file = new_subtitle_path
-            
+                    break
+
+            for file in os.listdir(SUBTITLE_DIR):
+                if file.endswith(".srt"):
+                    subtitle_file = os.path.join(SUBTITLE_DIR, file)
+                    break
+
             if not video_file:
                 raise Exception("Downloaded video file not found")
-            
+
             logger.info(f"Download completed successfully: {video_file}")
             if subtitle_file:
                 logger.info(f"Subtitle file: {subtitle_file}")
-            
+
             return video_file, subtitle_file
-        
+
         except Exception as e:
             logger.error(f"Download attempt {attempt + 1} failed: {str(e)}")
             if attempt == max_retries - 1:
@@ -139,21 +139,20 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         status_message = await update.message.reply_text("Starting download. Please wait...")
         try:
             logger.info(f"Starting download process for URL: {message_text}")
-            # 修改这一行
             video_file, subtitle_file = await download_video_task(message_text, update, context)
-            
+
             logger.info(f"Sending video file to user: {video_file}")
             await update.message.reply_document(document=open(video_file, 'rb'))
-            
+
             if subtitle_file:
                 logger.info(f"Sending subtitle file to user: {subtitle_file}")
                 await update.message.reply_document(document=open(subtitle_file, 'rb'))
-            
+
             logger.info(f"Deleting files: {video_file}, {subtitle_file}")
             os.remove(video_file)
             if subtitle_file:
                 os.remove(subtitle_file)
-            
+
             logger.info("Download and send process completed successfully")
             await status_message.edit_text("Download completed and files sent!")
         except Exception as e:
@@ -166,18 +165,18 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 def main() -> None:
     """Start the bot."""
     logger.info("Starting the bot")
-    
+
     # 创建 Application，不使用代理
     application = (
         Application.builder()
         .token(TOKEN)
         .build()
     )
-    
+
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, download_video))
-    
+
     logger.info("Bot is now polling for updates")
     application.run_polling(allowed_updates=Update.ALL_TYPES)
 
