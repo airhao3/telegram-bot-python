@@ -9,7 +9,7 @@ import time
 import sys
 import asyncio
 import subprocess
-import json
+import datetime
 
 # 加载.env文件中的环境变量
 load_dotenv()
@@ -61,7 +61,7 @@ def is_url(text):
     )
     return bool(url_pattern.match(text))
 
-async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT_TYPE, max_retries=3):
+async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT_TYPE, status_message, max_retries=3):
     """Download video, audio, and subtitles using gallery-dl."""
     for attempt in range(max_retries):
         try:
@@ -84,6 +84,8 @@ async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT
             # 执行命令并捕获输出
             process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
 
+            progress = ""
+
             # 实时处理输出
             while True:
                 output = process.stdout.readline()
@@ -92,7 +94,13 @@ async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT
                 if output:
                     logger.debug(output.strip())
                     # 更新下载进度
-                    await update.message.edit_text(f"Downloading: {output.strip()}")
+                    new_progress = output.strip()
+                    if new_progress != progress:
+                        progress = new_progress
+                        try:
+                            await status_message.edit_text(f"Downloading: {progress}")
+                        except TelegramError:
+                            logger.warning("Failed to update progress message")
 
             # 检查是否有错误
             if process.returncode != 0:
@@ -116,6 +124,12 @@ async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT
             if not video_file:
                 raise Exception("Downloaded video file not found")
 
+            # 使用时间戳重命名文件以确保唯一性
+            timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+            new_video_file = os.path.join(DOWNLOAD_DIR, f"{timestamp}_{os.path.basename(video_file)}")
+            os.rename(video_file, new_video_file)
+            video_file = new_video_file
+
             logger.info(f"Download completed successfully: {video_file}")
             if subtitle_file:
                 logger.info(f"Subtitle file: {subtitle_file}")
@@ -129,7 +143,6 @@ async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT
             logger.info(f"Waiting 5 seconds before retry...")
             await asyncio.sleep(5)  # Wait for 5 seconds before retrying
 
-
 async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Handle video download request."""
     user = update.effective_user
@@ -139,18 +152,18 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         status_message = await update.message.reply_text("Starting download. Please wait...")
         try:
             logger.info(f"Starting download process for URL: {message_text}")
-            video_file, subtitle_file = await download_video_task(message_text, update, context)
-            
+            video_file, subtitle_file = await download_video_task(message_text, update, context, status_message)
+
             # 检查文件是否存在和可读
             if not os.path.exists(video_file) or not os.access(video_file, os.R_OK):
                 raise FileNotFoundError(f"Video file not found or not readable: {video_file}")
-            
+
             logger.info(f"Sending video file to user: {video_file}")
-            
+
             # 使用 with 语句确保文件正确关闭
             with open(video_file, 'rb') as video:
                 await update.message.reply_document(document=video)
-            
+
             if subtitle_file:
                 if not os.path.exists(subtitle_file) or not os.access(subtitle_file, os.R_OK):
                     logger.warning(f"Subtitle file not found or not readable: {subtitle_file}")
@@ -158,7 +171,7 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
                     logger.info(f"Sending subtitle file to user: {subtitle_file}")
                     with open(subtitle_file, 'rb') as subtitle:
                         await update.message.reply_document(document=subtitle)
-            
+
             logger.info(f"Deleting files: {video_file}, {subtitle_file}")
             try:
                 os.remove(video_file)
@@ -166,17 +179,17 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
                     os.remove(subtitle_file)
             except OSError as e:
                 logger.error(f"Error deleting files: {e}")
-            
+
             logger.info("Download and send process completed successfully")
             await status_message.edit_text("Download completed and files sent!")
-        
+
         except FileNotFoundError as e:
             logger.error(f"File not found: {str(e)}")
             await status_message.edit_text(f"Download failed: File not found. Please try again later.")
         except OSError as e:
             logger.error(f"OS error: {str(e)}")
             await status_message.edit_text(f"Download failed: System error. Please try again later.")
-        except telegram.error.TelegramError as e:
+        except TelegramError as e:
             logger.error(f"Telegram API error: {str(e)}")
             await status_message.edit_text(f"Failed to send file. The file may be too large or there might be a network issue.")
         except Exception as e:
@@ -185,21 +198,6 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     else:
         logger.warning(f"User {user.id} ({user.username}) sent invalid URL: {message_text}")
         await update.message.reply_text("This is not a valid URL. Please send a video URL.")
-
-
-    # 创建 Application，不使用代理
-    application = (
-        Application.builder()
-        .token(TOKEN)
-        .build()
-    )
-
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(CommandHandler("help", help_command))
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, download_video))
-
-    logger.info("Bot is now polling for updates")
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
 
 def main() -> None:
     """Start the bot."""
@@ -219,6 +217,6 @@ def main() -> None:
     logger.info("Bot is now polling for updates")
     application.run_polling(allowed_updates=Update.ALL_TYPES)
 
-
 if __name__ == "__main__":
     main()
+
