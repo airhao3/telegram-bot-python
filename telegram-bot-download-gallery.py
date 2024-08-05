@@ -15,7 +15,7 @@ import json
 load_dotenv()
 
 # 将环境变量中的token赋值给TOKEN
-
+TOKEN = os.getenv('TOKEN')
 # 设置下载目录
 DOWNLOAD_DIR = 'downloads'
 SUBTITLE_DIR = os.path.join(DOWNLOAD_DIR, 'subtitles')
@@ -129,6 +129,7 @@ async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT
             logger.info(f"Waiting 5 seconds before retry...")
             await asyncio.sleep(5)  # Wait for 5 seconds before retrying
 
+
 async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Handle video download request."""
     user = update.effective_user
@@ -139,27 +140,66 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         try:
             logger.info(f"Starting download process for URL: {message_text}")
             video_file, subtitle_file = await download_video_task(message_text, update, context)
-
+            
+            # 检查文件是否存在和可读
+            if not os.path.exists(video_file) or not os.access(video_file, os.R_OK):
+                raise FileNotFoundError(f"Video file not found or not readable: {video_file}")
+            
             logger.info(f"Sending video file to user: {video_file}")
-            await update.message.reply_document(document=open(video_file, 'rb'))
-
+            
+            # 使用 with 语句确保文件正确关闭
+            with open(video_file, 'rb') as video:
+                await update.message.reply_document(document=video)
+            
             if subtitle_file:
-                logger.info(f"Sending subtitle file to user: {subtitle_file}")
-                await update.message.reply_document(document=open(subtitle_file, 'rb'))
-
+                if not os.path.exists(subtitle_file) or not os.access(subtitle_file, os.R_OK):
+                    logger.warning(f"Subtitle file not found or not readable: {subtitle_file}")
+                else:
+                    logger.info(f"Sending subtitle file to user: {subtitle_file}")
+                    with open(subtitle_file, 'rb') as subtitle:
+                        await update.message.reply_document(document=subtitle)
+            
             logger.info(f"Deleting files: {video_file}, {subtitle_file}")
-            os.remove(video_file)
-            if subtitle_file:
-                os.remove(subtitle_file)
-
+            try:
+                os.remove(video_file)
+                if subtitle_file and os.path.exists(subtitle_file):
+                    os.remove(subtitle_file)
+            except OSError as e:
+                logger.error(f"Error deleting files: {e}")
+            
             logger.info("Download and send process completed successfully")
             await status_message.edit_text("Download completed and files sent!")
+        
+        except FileNotFoundError as e:
+            logger.error(f"File not found: {str(e)}")
+            await status_message.edit_text(f"Download failed: File not found. Please try again later.")
+        except OSError as e:
+            logger.error(f"OS error: {str(e)}")
+            await status_message.edit_text(f"Download failed: System error. Please try again later.")
+        except telegram.error.TelegramError as e:
+            logger.error(f"Telegram API error: {str(e)}")
+            await status_message.edit_text(f"Failed to send file. The file may be too large or there might be a network issue.")
         except Exception as e:
-            logger.error(f"Failed to download: {str(e)}")
-            await status_message.edit_text(f"Failed to download. Please try again later.")
+            logger.error(f"Unexpected error: {str(e)}", exc_info=True)
+            await status_message.edit_text(f"An unexpected error occurred. Please try again later.")
     else:
         logger.warning(f"User {user.id} ({user.username}) sent invalid URL: {message_text}")
         await update.message.reply_text("This is not a valid URL. Please send a video URL.")
+
+
+    # 创建 Application，不使用代理
+    application = (
+        Application.builder()
+        .token(TOKEN)
+        .build()
+    )
+
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("help", help_command))
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, download_video))
+
+    logger.info("Bot is now polling for updates")
+    application.run_polling(allowed_updates=Update.ALL_TYPES)
 
 def main() -> None:
     """Start the bot."""
@@ -178,6 +218,7 @@ def main() -> None:
 
     logger.info("Bot is now polling for updates")
     application.run_polling(allowed_updates=Update.ALL_TYPES)
+
 
 if __name__ == "__main__":
     main()

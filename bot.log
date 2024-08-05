@@ -958,3 +958,1068 @@
 2024-08-05 10:13:50,398 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
 2024-08-05 10:13:50,403 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fc4a72616f0>
 2024-08-05 10:13:50,404 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7fc4a7215c40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:30:38,636 - __main__ - INFO - Starting the bot
+2024-08-05 10:30:38,643 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-08-05 10:30:38,652 - httpx - DEBUG - load_verify_locations cafile='/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/certifi/cacert.pem'
+2024-08-05 10:30:38,696 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-08-05 10:30:38,697 - httpx - DEBUG - load_verify_locations cafile='/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/certifi/cacert.pem'
+2024-08-05 10:30:38,733 - __main__ - INFO - Bot is now polling for updates
+2024-08-05 10:30:38,733 - asyncio - DEBUG - Using selector: KqueueSelector
+2024-08-05 10:30:38,734 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getMe` with parameters `{}`
+2024-08-05 10:30:38,739 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:30:38,745 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f159b70>
+2024-08-05 10:30:38,746 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8c0f10dc40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:30:40,710 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f158a30>
+2024-08-05 10:30:40,711 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:30:40,712 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:30:40,712 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:30:40,712 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:30:40,713 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:30:41,404 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:30:45 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'254'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:30:41,405 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getMe "HTTP/1.1 200 OK"
+2024-08-05 10:30:41,406 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:30:41,406 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:30:41,406 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:30:41,407 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:30:41,407 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getMe` finished with return value `{'id': 6854288771, 'is_bot': True, 'first_name': 'zhang3DLDbot', 'username': 'zhang3DLDbot', 'can_join_groups': True, 'can_read_all_group_messages': False, 'supports_inline_queries': False, 'can_connect_to_business': False, 'has_main_web_app': False}`
+2024-08-05 10:30:41,408 - telegram.ext.ExtBot - DEBUG - This Bot is already initialized.
+2024-08-05 10:30:41,408 - telegram.ext.Updater - DEBUG - Updater started (polling)
+2024-08-05 10:30:41,409 - telegram.ext.Updater - DEBUG - Start network loop retry bootstrap del webhook
+2024-08-05 10:30:41,409 - telegram.ext.Updater - DEBUG - Deleting webhook
+2024-08-05 10:30:41,409 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `deleteWebhook` with parameters `{}`
+2024-08-05 10:30:41,410 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:30:41,411 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:30:41,411 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:30:41,411 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:30:41,412 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:30:41,981 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:30:46 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'68'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:30:41,991 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/deleteWebhook "HTTP/1.1 200 OK"
+2024-08-05 10:30:41,992 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:30:42,010 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:30:42,012 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:30:42,028 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:30:42,029 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `deleteWebhook` finished with return value `True`
+2024-08-05 10:30:42,029 - telegram.ext.Updater - DEBUG - Bootstrap done
+2024-08-05 10:30:42,029 - telegram.ext.Updater - DEBUG - Waiting for polling to start
+2024-08-05 10:30:42,029 - telegram.ext.Updater - DEBUG - Polling updates from Telegram started
+2024-08-05 10:30:42,030 - telegram.ext.Updater - DEBUG - Start network loop retry getting Updates
+2024-08-05 10:30:42,030 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:30:42,031 - telegram.ext.Application - INFO - Application started
+2024-08-05 10:30:42,031 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:30:42,035 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f1585b0>
+2024-08-05 10:30:42,035 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8c0f10dcc0> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:30:44,483 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f158460>
+2024-08-05 10:30:44,484 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:30:44,484 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:30:44,485 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:30:44,485 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:30:44,485 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:30:55,467 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:30:59 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:30:55,468 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:30:55,468 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:30:55,469 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:30:55,469 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:30:55,470 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:30:55,471 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:30:55,471 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:30:55,471 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:30:55,473 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:30:55,474 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:30:55,474 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:30:55,474 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:30:55,475 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:31:06,495 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:31:10 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:31:06,495 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:31:06,496 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:31:06,496 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:31:06,496 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:31:06,496 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:31:06,497 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:31:06,497 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:31:06,497 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:31:06,499 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:31:06,499 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:31:06,499 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:31:06,500 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:31:06,500 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:31:17,321 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:31:21 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:31:17,322 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:31:17,322 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:31:17,323 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:31:17,323 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:31:17,324 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:31:17,324 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:31:17,324 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:31:17,325 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:31:17,326 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:31:17,327 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:31:17,327 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:31:17,328 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:31:17,328 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:31:28,163 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:31:32 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:31:28,163 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:31:28,164 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:31:28,164 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:31:28,165 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:31:28,165 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:31:28,166 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:31:28,166 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:31:28,167 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:31:28,168 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:31:28,169 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:31:28,170 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:31:28,170 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:31:28,171 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:31:39,135 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:31:42 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:31:39,136 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:31:39,136 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:31:39,137 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:31:39,138 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:31:39,138 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:31:39,139 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:31:39,139 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:31:39,140 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:31:39,141 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:31:39,142 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:31:39,142 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:31:39,143 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:31:39,143 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:31:50,139 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:31:53 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:31:50,140 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:31:50,141 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:31:50,141 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:31:50,141 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:31:50,142 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:31:50,143 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:31:50,143 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:31:50,143 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:31:50,145 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:31:50,146 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:31:50,146 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:31:50,147 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:31:50,147 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:01,119 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:32:04 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:32:01,119 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:32:01,120 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:32:01,120 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:32:01,120 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:32:01,121 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:32:01,122 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:32:01,122 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:32:01,123 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:32:01,124 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:01,125 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:32:01,125 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:32:01,126 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:32:01,126 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:12,141 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:32:15 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:32:12,142 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:32:12,142 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:32:12,143 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:32:12,143 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:32:12,143 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:32:12,144 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:32:12,144 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:32:12,145 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:32:12,146 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:12,147 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:32:12,147 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:32:12,149 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:32:12,151 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:23,134 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:32:26 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:32:23,135 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:32:23,135 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:32:23,136 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:32:23,136 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:32:23,136 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:32:23,137 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:32:23,137 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:32:23,138 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:32:23,139 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:23,140 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:32:23,140 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:32:23,141 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:32:23,141 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:34,007 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:32:37 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:32:34,008 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:32:34,008 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:32:34,009 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:32:34,009 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:32:34,010 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:32:34,011 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:32:34,011 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:32:34,011 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:32:34,013 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:34,014 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:32:34,014 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:32:34,014 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:32:34,015 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:40,458 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:32:44 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'511'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:32:40,459 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:32:40,460 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:32:40,460 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:32:40,460 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:32:40,461 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:32:40,462 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[{'update_id': 353941840, 'message': {'message_id': 65, 'from': {'id': 2042811943, 'is_bot': False, 'first_name': 'Jack', 'language_code': 'en'}, 'chat': {'id': 2042811943, 'first_name': 'Jack', 'type': 'private'}, 'date': 1722825164, 'text': 'https://twitter.com/rainmaker1973/status/1820007387572408579?s=12&t=C32WjbeEKp_Ar-IcZwNKKw', 'entities': [{'offset': 0, 'length': 90, 'type': 'url'}], 'link_preview_options': {'url': 'https://twitter.com/rainmaker1973/status/1820007387572408579?s=12&t=C32WjbeEKp_Ar-IcZwNKKw'}}}]`
+2024-08-05 10:32:40,462 - telegram.ext.ExtBot - DEBUG - Getting updates: [353941840]
+2024-08-05 10:32:40,463 - telegram.ext.Application - DEBUG - Processing update Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Jack', id=2042811943, type=<ChatType.PRIVATE>), date=datetime.datetime(2024, 8, 5, 2, 32, 44, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=90, offset=0, type=<MessageEntityType.URL>),), from_user=User(first_name='Jack', id=2042811943, is_bot=False, language_code='en'), group_chat_created=False, link_preview_options=LinkPreviewOptions(url='https://twitter.com/rainmaker1973/status/1820007387572408579?s=12&t=C32WjbeEKp_Ar-IcZwNKKw'), message_id=65, supergroup_chat_created=False, text='https://twitter.com/rainmaker1973/status/1820007387572408579?s=12&t=C32WjbeEKp_Ar-IcZwNKKw'), update_id=353941840)
+2024-08-05 10:32:40,466 - __main__ - INFO - Received message from user 2042811943 (None): https://twitter.com/rainmaker1973/status/1820007387572408579?s=12&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:32:40,467 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `sendMessage` with parameters `{'chat_id': 2042811943, 'text': 'Starting download. Please wait...'}`
+2024-08-05 10:32:40,468 - httpcore.connection - DEBUG - close.started
+2024-08-05 10:32:40,469 - httpcore.connection - DEBUG - close.complete
+2024-08-05 10:32:40,469 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:32:40,470 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941841, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:32:40,471 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:40,472 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:32:40,472 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:32:40,473 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:32:40,473 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:40,475 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f1ae770>
+2024-08-05 10:32:40,475 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8c0f10dc40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:32:42,945 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f1afca0>
+2024-08-05 10:32:42,946 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:42,947 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:32:42,947 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:32:42,947 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:32:42,948 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:44,214 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:32:47 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'254'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:32:44,215 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/sendMessage "HTTP/1.1 200 OK"
+2024-08-05 10:32:44,215 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:32:44,216 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:32:44,216 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:32:44,217 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:32:44,217 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `sendMessage` finished with return value `{'message_id': 66, 'from': {'id': 6854288771, 'is_bot': True, 'first_name': 'zhang3DLDbot', 'username': 'zhang3DLDbot'}, 'chat': {'id': 2042811943, 'first_name': 'Jack', 'type': 'private'}, 'date': 1722825167, 'text': 'Starting download. Please wait...'}`
+2024-08-05 10:32:44,218 - __main__ - INFO - Starting download process for URL: https://twitter.com/rainmaker1973/status/1820007387572408579?s=12&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:32:44,218 - __main__ - INFO - Starting download attempt 1 for URL: https://twitter.com/rainmaker1973/status/1820007387572408579?s=12&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:32:54,876 - __main__ - DEBUG - downloads/1820007387572408579_1.mp4
+2024-08-05 10:32:54,877 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `editMessageText` with parameters `{'text': 'Downloading: downloads/1820007387572408579_1.mp4', 'chat_id': 2042811943, 'message_id': 65}`
+2024-08-05 10:32:54,879 - httpcore.connection - DEBUG - close.started
+2024-08-05 10:32:54,880 - httpcore.connection - DEBUG - close.complete
+2024-08-05 10:32:54,881 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:32:54,882 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:32:55 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:32:54,883 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:32:54,883 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:32:54,883 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:32:54,883 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:32:54,884 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:32:54,884 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:32:54,884 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:32:54,885 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941841, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:32:54,887 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:54,888 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:32:54,888 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:32:54,889 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:32:54,889 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:54,889 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f1aead0>
+2024-08-05 10:32:54,890 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8c0f10dc40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:32:56,489 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f1aefe0>
+2024-08-05 10:32:56,489 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:56,490 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:32:56,490 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:32:56,491 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:32:56,491 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:32:57,048 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 400, b'Bad Request', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:33:01 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'82'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:32:57,048 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/editMessageText "HTTP/1.1 400 Bad Request"
+2024-08-05 10:32:57,048 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:32:57,048 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:32:57,049 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:32:57,049 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:32:57,049 - __main__ - ERROR - Download attempt 1 failed: Message can't be edited
+2024-08-05 10:32:57,049 - __main__ - INFO - Waiting 5 seconds before retry...
+2024-08-05 10:33:02,050 - __main__ - INFO - Starting download attempt 2 for URL: https://twitter.com/rainmaker1973/status/1820007387572408579?s=12&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:33:05,789 - __main__ - DEBUG - # downloads/1820007387572408579_1.mp4
+2024-08-05 10:33:05,791 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `editMessageText` with parameters `{'text': 'Downloading: # downloads/1820007387572408579_1.mp4', 'chat_id': 2042811943, 'message_id': 65}`
+2024-08-05 10:33:05,793 - httpcore.connection - DEBUG - close.started
+2024-08-05 10:33:05,793 - httpcore.connection - DEBUG - close.complete
+2024-08-05 10:33:05,794 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:33:05,798 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f200730>
+2024-08-05 10:33:05,798 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8c0f10dc40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:33:05,940 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:33:09 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:33:05,941 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:33:05,941 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:33:05,941 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:33:05,941 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:33:05,942 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:33:05,942 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:33:05,942 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:33:05,942 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941841, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:33:05,943 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:05,943 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:33:05,944 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:33:05,944 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:33:05,944 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:07,675 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f159060>
+2024-08-05 10:33:07,676 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:07,676 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:33:07,677 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:33:07,677 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:33:07,677 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:08,280 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 400, b'Bad Request', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:33:12 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'82'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:33:08,282 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/editMessageText "HTTP/1.1 400 Bad Request"
+2024-08-05 10:33:08,282 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:33:08,283 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:33:08,283 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:33:08,284 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:33:08,284 - __main__ - ERROR - Download attempt 2 failed: Message can't be edited
+2024-08-05 10:33:08,285 - __main__ - INFO - Waiting 5 seconds before retry...
+2024-08-05 10:33:13,286 - __main__ - INFO - Starting download attempt 3 for URL: https://twitter.com/rainmaker1973/status/1820007387572408579?s=12&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:33:15,488 - __main__ - DEBUG - # downloads/1820007387572408579_1.mp4
+2024-08-05 10:33:15,489 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `editMessageText` with parameters `{'text': 'Downloading: # downloads/1820007387572408579_1.mp4', 'chat_id': 2042811943, 'message_id': 65}`
+2024-08-05 10:33:15,497 - httpcore.connection - DEBUG - close.started
+2024-08-05 10:33:15,499 - httpcore.connection - DEBUG - close.complete
+2024-08-05 10:33:15,500 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:33:15,505 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f1ac2b0>
+2024-08-05 10:33:15,505 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8c0f10dc40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:33:16,713 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f1afd30>
+2024-08-05 10:33:16,714 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:16,714 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:33:16,715 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:33:16,715 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:33:16,715 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:16,983 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:33:20 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:33:16,986 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:33:16,988 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:33:16,988 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:33:16,988 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:33:16,989 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:33:16,990 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:33:16,990 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:33:16,992 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941841, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:33:16,994 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:16,995 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:33:16,995 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:33:16,996 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:33:16,996 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:17,300 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 400, b'Bad Request', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:33:21 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'82'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:33:17,301 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/editMessageText "HTTP/1.1 400 Bad Request"
+2024-08-05 10:33:17,302 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:33:17,302 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:33:17,302 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:33:17,302 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:33:17,303 - __main__ - ERROR - Download attempt 3 failed: Message can't be edited
+2024-08-05 10:33:17,303 - __main__ - ERROR - Failed to download: Message can't be edited
+2024-08-05 10:33:17,303 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `editMessageText` with parameters `{'text': 'Failed to download. Please try again later.', 'chat_id': 2042811943, 'message_id': 66}`
+2024-08-05 10:33:17,306 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:17,307 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:33:17,308 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:33:17,309 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:33:17,311 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:18,068 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:33:22 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'287'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:33:18,069 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/editMessageText "HTTP/1.1 200 OK"
+2024-08-05 10:33:18,070 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:33:18,070 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:33:18,070 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:33:18,071 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:33:18,071 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `editMessageText` finished with return value `{'message_id': 66, 'from': {'id': 6854288771, 'is_bot': True, 'first_name': 'zhang3DLDbot', 'username': 'zhang3DLDbot'}, 'chat': {'id': 2042811943, 'first_name': 'Jack', 'type': 'private'}, 'date': 1722825167, 'edit_date': 1722825202, 'text': 'Failed to download. Please try again later.'}`
+2024-08-05 10:33:28,044 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:33:31 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:33:28,044 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:33:28,045 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:33:28,046 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:33:28,047 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:33:28,048 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:33:28,049 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:33:28,049 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:33:28,050 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941841, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:33:28,052 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:28,053 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:33:28,053 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:33:28,055 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:33:28,056 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:39,092 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:33:42 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:33:39,094 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:33:39,095 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:33:39,096 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:33:39,097 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:33:39,098 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:33:39,099 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:33:39,099 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:33:39,099 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941841, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:33:39,101 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:39,102 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:33:39,102 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:33:39,103 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:33:39,103 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:47,808 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:33:51 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'511'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:33:47,809 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:33:47,810 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:33:47,810 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:33:47,811 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:33:47,811 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:33:47,812 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[{'update_id': 353941841, 'message': {'message_id': 67, 'from': {'id': 2042811943, 'is_bot': False, 'first_name': 'Jack', 'language_code': 'en'}, 'chat': {'id': 2042811943, 'first_name': 'Jack', 'type': 'private'}, 'date': 1722825231, 'text': 'https://twitter.com/dian_gan58868/status/1820219374713856497?s=52&t=C32WjbeEKp_Ar-IcZwNKKw', 'entities': [{'offset': 0, 'length': 90, 'type': 'url'}], 'link_preview_options': {'url': 'https://twitter.com/dian_gan58868/status/1820219374713856497?s=52&t=C32WjbeEKp_Ar-IcZwNKKw'}}}]`
+2024-08-05 10:33:47,813 - telegram.ext.ExtBot - DEBUG - Getting updates: [353941841]
+2024-08-05 10:33:47,814 - telegram.ext.Application - DEBUG - Processing update Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Jack', id=2042811943, type=<ChatType.PRIVATE>), date=datetime.datetime(2024, 8, 5, 2, 33, 51, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=90, offset=0, type=<MessageEntityType.URL>),), from_user=User(first_name='Jack', id=2042811943, is_bot=False, language_code='en'), group_chat_created=False, link_preview_options=LinkPreviewOptions(url='https://twitter.com/dian_gan58868/status/1820219374713856497?s=52&t=C32WjbeEKp_Ar-IcZwNKKw'), message_id=67, supergroup_chat_created=False, text='https://twitter.com/dian_gan58868/status/1820219374713856497?s=52&t=C32WjbeEKp_Ar-IcZwNKKw'), update_id=353941841)
+2024-08-05 10:33:47,815 - __main__ - INFO - Received message from user 2042811943 (None): https://twitter.com/dian_gan58868/status/1820219374713856497?s=52&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:33:47,815 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `sendMessage` with parameters `{'chat_id': 2042811943, 'text': 'Starting download. Please wait...'}`
+2024-08-05 10:33:47,816 - httpcore.connection - DEBUG - close.started
+2024-08-05 10:33:47,816 - httpcore.connection - DEBUG - close.complete
+2024-08-05 10:33:47,816 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:33:47,817 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941842, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:33:47,819 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:47,820 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:33:47,820 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:33:47,821 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:33:47,821 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:47,823 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f203ee0>
+2024-08-05 10:33:47,824 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8c0f10dc40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:33:50,823 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f203c40>
+2024-08-05 10:33:50,824 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:50,824 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:33:50,824 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:33:50,825 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:33:50,825 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:33:51,977 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:33:55 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'254'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:33:51,977 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/sendMessage "HTTP/1.1 200 OK"
+2024-08-05 10:33:51,978 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:33:51,978 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:33:51,978 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:33:51,978 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:33:51,979 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `sendMessage` finished with return value `{'message_id': 68, 'from': {'id': 6854288771, 'is_bot': True, 'first_name': 'zhang3DLDbot', 'username': 'zhang3DLDbot'}, 'chat': {'id': 2042811943, 'first_name': 'Jack', 'type': 'private'}, 'date': 1722825235, 'text': 'Starting download. Please wait...'}`
+2024-08-05 10:33:51,979 - __main__ - INFO - Starting download process for URL: https://twitter.com/dian_gan58868/status/1820219374713856497?s=52&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:33:51,979 - __main__ - INFO - Starting download attempt 1 for URL: https://twitter.com/dian_gan58868/status/1820219374713856497?s=52&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:34:05,840 - __main__ - DEBUG - downloads/1820219374713856497_1.mp4
+2024-08-05 10:34:05,843 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `editMessageText` with parameters `{'text': 'Downloading: downloads/1820219374713856497_1.mp4', 'chat_id': 2042811943, 'message_id': 67}`
+2024-08-05 10:34:05,846 - httpcore.connection - DEBUG - close.started
+2024-08-05 10:34:05,847 - httpcore.connection - DEBUG - close.complete
+2024-08-05 10:34:05,847 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:34:05,849 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:34:02 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:34:05,850 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:34:05,851 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:34:05,851 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:34:05,851 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:34:05,851 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:34:05,852 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:34:05,852 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:34:05,856 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941842, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:34:05,859 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:05,862 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:34:05,862 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:34:05,863 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:34:05,863 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:05,864 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f200280>
+2024-08-05 10:34:05,864 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8c0f10dc40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:34:09,351 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f229ae0>
+2024-08-05 10:34:09,352 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:09,352 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:34:09,353 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:34:09,353 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:34:09,354 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:14,120 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 400, b'Bad Request', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:34:14 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'82'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:34:14,121 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/editMessageText "HTTP/1.1 400 Bad Request"
+2024-08-05 10:34:14,122 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:34:14,123 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:34:14,123 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:34:14,124 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:34:14,125 - __main__ - ERROR - Download attempt 1 failed: Message can't be edited
+2024-08-05 10:34:14,126 - __main__ - INFO - Waiting 5 seconds before retry...
+2024-08-05 10:34:16,929 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:34:20 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:34:16,929 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:34:16,930 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:34:16,930 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:34:16,930 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:34:16,931 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:34:16,931 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:34:16,931 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:34:16,932 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941842, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:34:16,934 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:16,934 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:34:16,935 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:34:16,937 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:34:16,937 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:19,128 - __main__ - INFO - Starting download attempt 2 for URL: https://twitter.com/dian_gan58868/status/1820219374713856497?s=52&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:34:22,202 - __main__ - DEBUG - # downloads/1820219374713856497_1.mp4
+2024-08-05 10:34:22,203 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `editMessageText` with parameters `{'text': 'Downloading: # downloads/1820219374713856497_1.mp4', 'chat_id': 2042811943, 'message_id': 67}`
+2024-08-05 10:34:22,206 - httpcore.connection - DEBUG - close.started
+2024-08-05 10:34:22,207 - httpcore.connection - DEBUG - close.complete
+2024-08-05 10:34:22,207 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:34:22,210 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f22b430>
+2024-08-05 10:34:22,211 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8c0f10dc40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:34:24,205 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f22b2e0>
+2024-08-05 10:34:24,205 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:24,206 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:34:24,206 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:34:24,207 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:34:24,207 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:24,880 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 400, b'Bad Request', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:34:29 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'82'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:34:24,881 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/editMessageText "HTTP/1.1 400 Bad Request"
+2024-08-05 10:34:24,882 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:34:24,882 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:34:24,882 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:34:24,882 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:34:24,883 - __main__ - ERROR - Download attempt 2 failed: Message can't be edited
+2024-08-05 10:34:24,883 - __main__ - INFO - Waiting 5 seconds before retry...
+2024-08-05 10:34:27,968 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:34:31 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:34:27,971 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:34:27,972 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:34:27,972 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:34:27,973 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:34:27,973 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:34:27,974 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:34:27,974 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:34:27,975 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941842, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:34:27,977 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:27,977 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:34:27,978 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:34:27,978 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:34:27,978 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:29,885 - __main__ - INFO - Starting download attempt 3 for URL: https://twitter.com/dian_gan58868/status/1820219374713856497?s=52&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:34:37,894 - __main__ - DEBUG - # downloads/1820219374713856497_1.mp4
+2024-08-05 10:34:37,895 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `editMessageText` with parameters `{'text': 'Downloading: # downloads/1820219374713856497_1.mp4', 'chat_id': 2042811943, 'message_id': 67}`
+2024-08-05 10:34:37,897 - httpcore.connection - DEBUG - close.started
+2024-08-05 10:34:37,898 - httpcore.connection - DEBUG - close.complete
+2024-08-05 10:34:37,898 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:34:37,902 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f229810>
+2024-08-05 10:34:37,902 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8c0f10dc40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:34:39,049 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:34:42 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:34:39,050 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:34:39,051 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:34:39,051 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:34:39,052 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:34:39,052 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:34:39,053 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:34:39,053 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:34:39,053 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941842, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:34:39,055 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:39,056 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:34:39,056 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:34:39,056 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:34:39,056 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:39,822 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f229600>
+2024-08-05 10:34:39,823 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:39,824 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:34:39,824 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:34:39,824 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:34:39,824 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:40,464 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 400, b'Bad Request', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:34:44 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'82'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:34:40,465 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/editMessageText "HTTP/1.1 400 Bad Request"
+2024-08-05 10:34:40,466 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:34:40,466 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:34:40,467 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:34:40,467 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:34:40,468 - __main__ - ERROR - Download attempt 3 failed: Message can't be edited
+2024-08-05 10:34:40,468 - __main__ - ERROR - Failed to download: Message can't be edited
+2024-08-05 10:34:40,469 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `editMessageText` with parameters `{'text': 'Failed to download. Please try again later.', 'chat_id': 2042811943, 'message_id': 68}`
+2024-08-05 10:34:40,470 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:40,471 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:34:40,471 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:34:40,472 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:34:40,472 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:41,238 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:34:45 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'287'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:34:41,239 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/editMessageText "HTTP/1.1 200 OK"
+2024-08-05 10:34:41,239 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:34:41,240 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:34:41,240 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:34:41,241 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:34:41,241 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `editMessageText` finished with return value `{'message_id': 68, 'from': {'id': 6854288771, 'is_bot': True, 'first_name': 'zhang3DLDbot', 'username': 'zhang3DLDbot'}, 'chat': {'id': 2042811943, 'first_name': 'Jack', 'type': 'private'}, 'date': 1722825235, 'edit_date': 1722825285, 'text': 'Failed to download. Please try again later.'}`
+2024-08-05 10:34:50,150 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:34:53 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:34:50,151 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:34:50,152 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:34:50,152 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:34:50,153 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:34:50,153 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:34:50,154 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:34:50,154 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:34:50,155 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941842, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:34:50,156 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:50,157 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:34:50,158 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:34:50,158 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:34:50,158 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:34:56,773 - telegram.ext.Application - DEBUG - Application received stop signal. Shutting down.
+2024-08-05 10:34:56,773 - telegram.ext.Updater - DEBUG - Stopping Updater
+2024-08-05 10:34:56,774 - telegram.ext.Updater - DEBUG - Waiting background polling task to finish up.
+2024-08-05 10:34:56,774 - telegram.ext.Updater - DEBUG - Network loop retry getting Updates was cancelled
+2024-08-05 10:34:56,775 - httpcore.http11 - DEBUG - receive_response_headers.failed exception=CancelledError()
+2024-08-05 10:34:56,775 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:34:56,775 - telegram.ext.Updater - DEBUG - Calling `get_updates` one more time to mark all fetched updates as read.
+2024-08-05 10:34:56,775 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 0, 'offset': 353941842, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:34:56,777 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:34:56,778 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:34:56,784 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7f8c0f229c90>
+2024-08-05 10:34:56,784 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8c0f10dcc0> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:42:51,537 - __main__ - INFO - Starting the bot
+2024-08-05 10:42:51,542 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-08-05 10:42:51,548 - httpx - DEBUG - load_verify_locations cafile='/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/certifi/cacert.pem'
+2024-08-05 10:42:51,589 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-08-05 10:42:51,590 - httpx - DEBUG - load_verify_locations cafile='/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/certifi/cacert.pem'
+2024-08-05 10:42:51,626 - __main__ - INFO - Bot is now polling for updates
+2024-08-05 10:42:51,627 - asyncio - DEBUG - Using selector: KqueueSelector
+2024-08-05 10:42:51,627 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getMe` with parameters `{}`
+2024-08-05 10:42:51,632 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:42:51,636 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fe7a87c70a0>
+2024-08-05 10:42:51,637 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7fe7a8799d40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:42:53,562 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fe7a87c5f60>
+2024-08-05 10:42:53,562 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:42:53,562 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:42:53,563 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:42:53,563 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:42:53,563 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:42:54,305 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:42:58 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'254'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:42:54,307 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getMe "HTTP/1.1 200 OK"
+2024-08-05 10:42:54,307 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:42:54,307 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:42:54,308 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:42:54,308 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:42:54,308 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getMe` finished with return value `{'id': 6854288771, 'is_bot': True, 'first_name': 'zhang3DLDbot', 'username': 'zhang3DLDbot', 'can_join_groups': True, 'can_read_all_group_messages': False, 'supports_inline_queries': False, 'can_connect_to_business': False, 'has_main_web_app': False}`
+2024-08-05 10:42:54,309 - telegram.ext.ExtBot - DEBUG - This Bot is already initialized.
+2024-08-05 10:42:54,309 - telegram.ext.Updater - DEBUG - Updater started (polling)
+2024-08-05 10:42:54,309 - telegram.ext.Updater - DEBUG - Start network loop retry bootstrap del webhook
+2024-08-05 10:42:54,309 - telegram.ext.Updater - DEBUG - Deleting webhook
+2024-08-05 10:42:54,309 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `deleteWebhook` with parameters `{}`
+2024-08-05 10:42:54,310 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:42:54,310 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:42:54,310 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:42:54,310 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:42:54,311 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:42:54,960 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:42:58 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'68'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:42:54,960 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/deleteWebhook "HTTP/1.1 200 OK"
+2024-08-05 10:42:54,961 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:42:54,961 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:42:54,961 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:42:54,961 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:42:54,961 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `deleteWebhook` finished with return value `True`
+2024-08-05 10:42:54,961 - telegram.ext.Updater - DEBUG - Bootstrap done
+2024-08-05 10:42:54,962 - telegram.ext.Updater - DEBUG - Waiting for polling to start
+2024-08-05 10:42:54,962 - telegram.ext.Updater - DEBUG - Polling updates from Telegram started
+2024-08-05 10:42:54,962 - telegram.ext.Updater - DEBUG - Start network loop retry getting Updates
+2024-08-05 10:42:54,962 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:42:54,963 - telegram.ext.Application - INFO - Application started
+2024-08-05 10:42:54,963 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:42:54,966 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fe7a87c5990>
+2024-08-05 10:42:54,966 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7fe7a8799dc0> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:42:58,343 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fe7a882dba0>
+2024-08-05 10:42:58,343 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:42:58,343 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:42:58,344 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:42:58,344 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:42:58,344 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:43:09,394 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:43:13 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:43:09,395 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:43:09,395 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:43:09,395 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:43:09,395 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:43:09,395 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:43:09,396 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:43:09,396 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:43:09,396 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:43:09,397 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:43:09,398 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:43:09,398 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:43:09,398 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:43:09,398 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:43:20,609 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:43:24 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:43:20,609 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:43:20,610 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:43:20,610 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:43:20,610 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:43:20,610 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:43:20,610 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:43:20,611 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:43:20,611 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:43:20,612 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:43:20,612 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:43:20,612 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:43:20,613 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:43:20,613 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:43:31,766 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:43:35 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:43:31,767 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:43:31,767 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:43:31,767 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:43:31,767 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:43:31,767 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:43:31,768 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:43:31,768 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:43:31,768 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:43:31,769 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:43:31,770 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:43:31,770 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:43:31,770 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:43:31,770 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:43:42,913 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:43:46 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:43:42,914 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:43:42,914 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:43:42,914 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:43:42,914 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:43:42,915 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:43:42,915 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:43:42,915 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:43:42,916 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 0, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:43:42,917 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:43:42,917 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:43:42,917 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:43:42,918 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:43:42,918 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:43:53,572 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:43:57 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'509'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:43:53,573 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:43:53,573 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:43:53,573 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:43:53,573 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:43:53,573 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:43:53,574 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[{'update_id': 353941842, 'message': {'message_id': 69, 'from': {'id': 2042811943, 'is_bot': False, 'first_name': 'Jack', 'language_code': 'en'}, 'chat': {'id': 2042811943, 'first_name': 'Jack', 'type': 'private'}, 'date': 1722825837, 'text': 'https://twitter.com/shichuangang/status/1819991708848840973?s=52&t=C32WjbeEKp_Ar-IcZwNKKw', 'entities': [{'offset': 0, 'length': 89, 'type': 'url'}], 'link_preview_options': {'url': 'https://twitter.com/shichuangang/status/1819991708848840973?s=52&t=C32WjbeEKp_Ar-IcZwNKKw'}}}]`
+2024-08-05 10:43:53,574 - telegram.ext.ExtBot - DEBUG - Getting updates: [353941842]
+2024-08-05 10:43:53,574 - telegram.ext.Application - DEBUG - Processing update Update(message=Message(channel_chat_created=False, chat=Chat(first_name='Jack', id=2042811943, type=<ChatType.PRIVATE>), date=datetime.datetime(2024, 8, 5, 2, 43, 57, tzinfo=datetime.timezone.utc), delete_chat_photo=False, entities=(MessageEntity(length=89, offset=0, type=<MessageEntityType.URL>),), from_user=User(first_name='Jack', id=2042811943, is_bot=False, language_code='en'), group_chat_created=False, link_preview_options=LinkPreviewOptions(url='https://twitter.com/shichuangang/status/1819991708848840973?s=52&t=C32WjbeEKp_Ar-IcZwNKKw'), message_id=69, supergroup_chat_created=False, text='https://twitter.com/shichuangang/status/1819991708848840973?s=52&t=C32WjbeEKp_Ar-IcZwNKKw'), update_id=353941842)
+2024-08-05 10:43:53,575 - __main__ - INFO - Received message from user 2042811943 (None): https://twitter.com/shichuangang/status/1819991708848840973?s=52&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:43:53,576 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `sendMessage` with parameters `{'chat_id': 2042811943, 'text': 'Starting download. Please wait...'}`
+2024-08-05 10:43:53,576 - httpcore.connection - DEBUG - close.started
+2024-08-05 10:43:53,577 - httpcore.connection - DEBUG - close.complete
+2024-08-05 10:43:53,577 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:43:53,578 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:43:53,579 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:43:53,580 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:43:53,580 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:43:53,580 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:43:53,580 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:43:53,582 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fe7a882ffd0>
+2024-08-05 10:43:53,582 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7fe7a8799d40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:43:57,197 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fe7a882fe20>
+2024-08-05 10:43:57,198 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:43:57,198 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:43:57,199 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:43:57,199 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:43:57,199 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:43:58,339 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:44:02 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'254'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:43:58,340 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/sendMessage "HTTP/1.1 200 OK"
+2024-08-05 10:43:58,340 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:43:58,340 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:43:58,341 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:43:58,341 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:43:58,341 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `sendMessage` finished with return value `{'message_id': 70, 'from': {'id': 6854288771, 'is_bot': True, 'first_name': 'zhang3DLDbot', 'username': 'zhang3DLDbot'}, 'chat': {'id': 2042811943, 'first_name': 'Jack', 'type': 'private'}, 'date': 1722825842, 'text': 'Starting download. Please wait...'}`
+2024-08-05 10:43:58,341 - __main__ - INFO - Starting download process for URL: https://twitter.com/shichuangang/status/1819991708848840973?s=52&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:43:58,341 - __main__ - INFO - Starting download attempt 1 for URL: https://twitter.com/shichuangang/status/1819991708848840973?s=52&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:44:07,219 - __main__ - DEBUG - downloads/1819991708848840973_1.mp4
+2024-08-05 10:44:07,220 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `editMessageText` with parameters `{'text': 'Downloading: downloads/1819991708848840973_1.mp4', 'chat_id': 2042811943, 'message_id': 69}`
+2024-08-05 10:44:07,223 - httpcore.connection - DEBUG - close.started
+2024-08-05 10:44:07,223 - httpcore.connection - DEBUG - close.complete
+2024-08-05 10:44:07,224 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:44:07,225 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:44:08 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:44:07,226 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:44:07,226 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:44:07,226 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:44:07,227 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:44:07,227 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:44:07,227 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:44:07,227 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:44:07,228 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:44:07,229 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:07,231 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:44:07,231 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:44:07,231 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:44:07,232 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:07,233 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fe7a882f3a0>
+2024-08-05 10:44:07,234 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7fe7a8799d40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:44:09,590 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fe7a87c7e20>
+2024-08-05 10:44:09,590 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:09,591 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:44:09,591 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:44:09,592 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:44:09,592 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:10,317 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 400, b'Bad Request', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:44:14 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'82'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:44:10,318 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/editMessageText "HTTP/1.1 400 Bad Request"
+2024-08-05 10:44:10,318 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:44:10,319 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:44:10,319 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:44:10,319 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:44:10,320 - __main__ - ERROR - Download attempt 1 failed: Message can't be edited
+2024-08-05 10:44:10,320 - __main__ - INFO - Waiting 5 seconds before retry...
+2024-08-05 10:44:15,321 - __main__ - INFO - Starting download attempt 2 for URL: https://twitter.com/shichuangang/status/1819991708848840973?s=52&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:44:18,615 - __main__ - DEBUG - # downloads/1819991708848840973_1.mp4
+2024-08-05 10:44:18,617 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `editMessageText` with parameters `{'text': 'Downloading: # downloads/1819991708848840973_1.mp4', 'chat_id': 2042811943, 'message_id': 69}`
+2024-08-05 10:44:18,621 - httpcore.connection - DEBUG - close.started
+2024-08-05 10:44:18,622 - httpcore.connection - DEBUG - close.complete
+2024-08-05 10:44:18,623 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:44:18,625 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:44:22 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:44:18,626 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:44:18,627 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:44:18,628 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:44:18,628 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:44:18,629 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:44:18,632 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:44:18,632 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:44:18,635 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:44:18,638 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:18,639 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:44:18,639 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:44:18,640 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:44:18,640 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:18,641 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fe7a882d750>
+2024-08-05 10:44:18,642 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7fe7a8799d40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:44:22,216 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fe7a8a05960>
+2024-08-05 10:44:22,217 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:22,218 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:44:22,219 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:44:22,219 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:44:22,220 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:23,328 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 400, b'Bad Request', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:44:27 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'82'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:44:23,328 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/editMessageText "HTTP/1.1 400 Bad Request"
+2024-08-05 10:44:23,329 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:44:23,329 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:44:23,329 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:44:23,330 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:44:23,330 - __main__ - ERROR - Download attempt 2 failed: Message can't be edited
+2024-08-05 10:44:23,330 - __main__ - INFO - Waiting 5 seconds before retry...
+2024-08-05 10:44:28,332 - __main__ - INFO - Starting download attempt 3 for URL: https://twitter.com/shichuangang/status/1819991708848840973?s=52&t=C32WjbeEKp_Ar-IcZwNKKw
+2024-08-05 10:44:33,571 - __main__ - DEBUG - # downloads/1819991708848840973_1.mp4
+2024-08-05 10:44:33,579 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `editMessageText` with parameters `{'text': 'Downloading: # downloads/1819991708848840973_1.mp4', 'chat_id': 2042811943, 'message_id': 69}`
+2024-08-05 10:44:33,581 - httpcore.connection - DEBUG - close.started
+2024-08-05 10:44:33,582 - httpcore.connection - DEBUG - close.complete
+2024-08-05 10:44:33,583 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:44:33,585 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:44:33 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:44:33,586 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:44:33,586 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:44:33,587 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:44:33,588 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:44:33,588 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:44:33,589 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:44:33,589 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:44:33,591 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:44:33,594 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:33,595 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:44:33,595 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:44:33,596 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:44:33,596 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:33,597 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fe7a8a04d90>
+2024-08-05 10:44:33,597 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7fe7a8799d40> server_hostname='api.telegram.org' timeout=5.0
+2024-08-05 10:44:35,883 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fe7a8a04e50>
+2024-08-05 10:44:35,884 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:35,885 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:44:35,885 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:44:35,885 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:44:35,886 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:36,670 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 400, b'Bad Request', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:44:40 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'82'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:44:36,671 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/editMessageText "HTTP/1.1 400 Bad Request"
+2024-08-05 10:44:36,671 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:44:36,672 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:44:36,672 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:44:36,672 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:44:36,673 - __main__ - ERROR - Download attempt 3 failed: Message can't be edited
+2024-08-05 10:44:36,674 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/airhao3/NextCloudServerFolder/document/telegram-bot-python/telegram-bot-download-gallery.py", line 142, in download_video
+    video_file, subtitle_file = await download_video_task(message_text, update, context)
+  File "/Users/airhao3/NextCloudServerFolder/document/telegram-bot-python/telegram-bot-download-gallery.py", line 95, in download_video_task
+    await update.message.edit_text(f"Downloading: {output.strip()}")
+  File "/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/telegram/_message.py", line 3660, in edit_text
+    return await self.get_bot().edit_message_text(
+  File "/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/telegram/ext/_extbot.py", line 1664, in edit_message_text
+    return await super().edit_message_text(
+  File "/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/telegram/_bot.py", line 4045, in edit_message_text
+    return await self._send_message(
+  File "/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/telegram/ext/_extbot.py", line 610, in _send_message
+    result = await super()._send_message(
+  File "/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/telegram/_bot.py", line 744, in _send_message
+    result = await self._post(
+  File "/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/telegram/_bot.py", line 622, in _post
+    return await self._do_post(
+  File "/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/telegram/ext/_extbot.py", line 355, in _do_post
+    return await super()._do_post(
+  File "/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/telegram/_bot.py", line 651, in _do_post
+    result = await request.post(
+  File "/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/telegram/request/_baserequest.py", line 200, in post
+    result = await self._request_wrapper(
+  File "/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/telegram/request/_baserequest.py", line 381, in _request_wrapper
+    raise BadRequest(message)
+telegram.error.BadRequest: Message can't be edited
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/telegram/ext/_application.py", line 1335, in process_update
+    await coroutine
+  File "/Users/airhao3/miniconda3/envs/bot/lib/python3.10/site-packages/telegram/ext/_handlers/basehandler.py", line 157, in handle_update
+    return await self.callback(update, context)
+  File "/Users/airhao3/NextCloudServerFolder/document/telegram-bot-python/telegram-bot-download-gallery.py", line 179, in download_video
+    except telegram.error.TelegramError as e:
+NameError: name 'telegram' is not defined
+2024-08-05 10:44:44,566 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:44:48 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:44:44,567 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:44:44,567 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:44:44,568 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:44:44,568 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:44:44,569 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:44:44,569 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:44:44,569 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:44:44,570 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:44:44,573 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:44,574 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:44:44,574 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:44:44,575 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:44:44,575 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:55,419 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:44:59 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:44:55,419 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:44:55,420 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:44:55,420 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:44:55,420 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:44:55,420 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:44:55,421 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:44:55,421 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:44:55,421 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:44:55,423 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:44:55,423 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:44:55,424 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:44:55,424 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:44:55,424 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:45:06,295 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:45:10 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:45:06,296 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:45:06,297 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:45:06,298 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:45:06,299 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:45:06,299 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:45:06,299 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:45:06,299 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:45:06,300 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:45:06,301 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:45:06,301 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:45:06,301 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:45:06,302 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:45:06,302 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:45:17,017 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:45:21 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:45:17,017 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:45:17,017 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:45:17,018 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:45:17,018 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:45:17,018 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:45:17,019 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:45:17,019 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:45:17,019 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:45:17,020 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:45:17,021 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:45:17,021 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:45:17,021 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:45:17,022 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:45:27,854 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:45:31 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:45:27,856 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:45:27,856 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:45:27,856 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:45:27,856 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:45:27,856 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:45:27,857 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:45:27,857 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:45:27,857 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:45:27,859 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:45:27,859 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:45:27,859 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:45:27,860 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:45:27,860 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:45:38,628 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:45:42 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:45:38,629 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:45:38,629 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:45:38,629 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:45:38,629 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:45:38,630 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:45:38,631 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:45:38,631 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:45:38,632 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:45:38,633 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:45:38,633 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:45:38,633 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:45:38,634 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:45:38,634 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:45:49,337 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:45:53 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:45:49,338 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:45:49,338 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:45:49,338 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:45:49,339 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:45:49,339 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:45:49,339 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:45:49,339 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:45:49,340 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:45:49,341 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:45:49,341 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:45:49,341 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:45:49,342 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:45:49,342 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:46:00,081 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:46:04 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:46:00,081 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:46:00,081 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:46:00,082 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:46:00,082 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:46:00,082 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:46:00,083 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:46:00,083 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:46:00,083 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:46:00,084 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:46:00,085 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:46:00,085 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:46:00,085 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:46:00,086 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:46:10,837 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:46:14 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:46:10,838 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:46:10,838 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:46:10,838 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:46:10,839 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:46:10,839 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:46:10,839 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:46:10,839 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:46:10,840 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:46:10,841 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:46:10,841 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:46:10,842 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:46:10,842 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:46:10,842 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:46:21,941 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:46:26 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:46:21,941 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:46:21,942 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:46:21,942 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:46:21,942 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:46:21,942 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:46:21,942 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:46:21,943 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:46:21,943 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:46:21,944 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:46:21,944 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:46:21,944 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:46:21,945 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:46:21,945 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:46:32,624 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:46:36 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:46:32,624 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:46:32,625 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:46:32,625 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:46:32,625 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:46:32,626 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:46:32,626 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:46:32,626 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:46:32,626 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:46:32,627 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:46:32,629 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:46:32,629 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:46:32,629 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:46:32,630 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:46:43,242 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:46:47 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:46:43,246 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:46:43,246 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:46:43,247 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:46:43,248 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:46:43,248 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:46:43,249 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:46:43,249 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:46:43,249 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:46:43,251 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:46:43,252 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:46:43,252 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:46:43,252 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:46:43,252 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:46:54,009 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'nginx/1.18.0'), (b'Date', b'Mon, 05 Aug 2024 02:46:58 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'23'), (b'Connection', b'keep-alive'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'Access-Control-Allow-Origin', b'*'), (b'Access-Control-Allow-Methods', b'GET, POST, OPTIONS'), (b'Access-Control-Expose-Headers', b'Content-Length,Content-Type,Date,Server,Connection')])
+2024-08-05 10:46:54,010 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot6854288771:AAHgUslPXeN0MwMzAOersKvFne1oM4bErPg/getUpdates "HTTP/1.1 200 OK"
+2024-08-05 10:46:54,010 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2024-08-05 10:46:54,010 - httpcore.http11 - DEBUG - receive_response_body.complete
+2024-08-05 10:46:54,010 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:46:54,010 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:46:54,011 - telegram.ext.ExtBot - DEBUG - Call to Bot API endpoint `getUpdates` finished with return value `[]`
+2024-08-05 10:46:54,011 - telegram.ext.ExtBot - DEBUG - No new updates found.
+2024-08-05 10:46:54,011 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 10, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:46:54,012 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2024-08-05 10:46:54,013 - httpcore.http11 - DEBUG - send_request_headers.complete
+2024-08-05 10:46:54,013 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2024-08-05 10:46:54,013 - httpcore.http11 - DEBUG - send_request_body.complete
+2024-08-05 10:46:54,013 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2024-08-05 10:47:01,409 - telegram.ext.Application - DEBUG - Application received stop signal. Shutting down.
+2024-08-05 10:47:01,409 - telegram.ext.Updater - DEBUG - Stopping Updater
+2024-08-05 10:47:01,410 - telegram.ext.Updater - DEBUG - Waiting background polling task to finish up.
+2024-08-05 10:47:01,410 - telegram.ext.Updater - DEBUG - Network loop retry getting Updates was cancelled
+2024-08-05 10:47:01,411 - httpcore.http11 - DEBUG - receive_response_headers.failed exception=CancelledError()
+2024-08-05 10:47:01,411 - httpcore.http11 - DEBUG - response_closed.started
+2024-08-05 10:47:01,412 - telegram.ext.Updater - DEBUG - Calling `get_updates` one more time to mark all fetched updates as read.
+2024-08-05 10:47:01,412 - telegram.ext.ExtBot - DEBUG - Calling Bot API endpoint `getUpdates` with parameters `{'timeout': 0, 'offset': 353941843, 'allowed_updates': [<UpdateType.MESSAGE>, <UpdateType.EDITED_MESSAGE>, <UpdateType.CHANNEL_POST>, <UpdateType.EDITED_CHANNEL_POST>, <UpdateType.INLINE_QUERY>, <UpdateType.CHOSEN_INLINE_RESULT>, <UpdateType.CALLBACK_QUERY>, <UpdateType.SHIPPING_QUERY>, <UpdateType.PRE_CHECKOUT_QUERY>, <UpdateType.POLL>, <UpdateType.POLL_ANSWER>, <UpdateType.MY_CHAT_MEMBER>, <UpdateType.CHAT_MEMBER>, <UpdateType.CHAT_JOIN_REQUEST>, <UpdateType.CHAT_BOOST>, <UpdateType.REMOVED_CHAT_BOOST>, <UpdateType.MESSAGE_REACTION>, <UpdateType.MESSAGE_REACTION_COUNT>, <UpdateType.BUSINESS_CONNECTION>, <UpdateType.BUSINESS_MESSAGE>, <UpdateType.EDITED_BUSINESS_MESSAGE>, <UpdateType.DELETED_BUSINESS_MESSAGES>]}`
+2024-08-05 10:47:01,414 - httpcore.http11 - DEBUG - response_closed.complete
+2024-08-05 10:47:01,415 - httpcore.connection - DEBUG - connect_tcp.started host='api.telegram.org' port=443 local_address=None timeout=5.0 socket_options=None
+2024-08-05 10:47:01,419 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fe7a8a46c20>
+2024-08-05 10:47:01,419 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7fe7a8799dc0> server_hostname='api.telegram.org' timeout=5.0
