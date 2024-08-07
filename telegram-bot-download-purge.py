@@ -1,5 +1,5 @@
-## 更新使用uuid标记当前的下载文件名称， 并使用uuid直接查找文件发送，
-## 取消发送之后删除的功能，保留下载内容在服务器。
+## 只下载MP4文件， 并在下载完成之后就进行删除
+## 适用于小容量的vps进行使用， 使用结束立即清空
 import logging
 import re
 import os
@@ -11,7 +11,6 @@ import time
 import sys
 import asyncio
 import subprocess
-import datetime
 import uuid
 
 # 加载.env文件中的环境变量
@@ -21,12 +20,9 @@ load_dotenv()
 TOKEN = os.getenv('TOKEN')
 # 设置下载目录
 DOWNLOAD_DIR = 'downloads'
-SUBTITLE_DIR = os.path.join(DOWNLOAD_DIR, 'subtitles')
 
 if not os.path.exists(DOWNLOAD_DIR):
     os.makedirs(DOWNLOAD_DIR)
-if not os.path.exists(SUBTITLE_DIR):
-    os.makedirs(SUBTITLE_DIR)
 
 # 配置日志记录
 logging.basicConfig(
@@ -65,22 +61,19 @@ def is_url(text):
     return bool(url_pattern.match(text))
 
 async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT_TYPE, status_message, max_retries=3):
-    """Download video, audio, and subtitles using gallery-dl."""
+    """Download video using gallery-dl."""
     for attempt in range(max_retries):
         try:
             logger.info(f"Starting download attempt {attempt + 1} for URL: {url}")
 
-            # 构建gallery-dl命令
+            # 构建gallery-dl命令，只下载mp4文件
             command = [
                 'gallery-dl',
                 '-v',  # 详细输出
                 '--write-metadata',  # 写入元数据
                 '--write-info-json',  # 写入info.json
                 '-D', DOWNLOAD_DIR,  # 设置下载目录
-                '--exec', 'mv {} {}'.format(
-                    os.path.join(DOWNLOAD_DIR, '*.srt'),
-                    SUBTITLE_DIR
-                ),  # 移动字幕文件到字幕目录
+                #'--format', 'mp4',  # 下载mp4文件
                 url
             ]
 
@@ -113,15 +106,9 @@ async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT
 
             # 找到下载的文件
             video_file = None
-            subtitle_file = None
             for file in os.listdir(DOWNLOAD_DIR):
-                if file.endswith((".mp4", ".webm", ".mkv")):
+                if file.endswith(".mp4"):
                     video_file = os.path.join(DOWNLOAD_DIR, file)
-                    break
-
-            for file in os.listdir(SUBTITLE_DIR):
-                if file.endswith(".srt"):
-                    subtitle_file = os.path.join(SUBTITLE_DIR, file)
                     break
 
             if not video_file:
@@ -134,10 +121,8 @@ async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT
             video_file = new_video_file
 
             logger.info(f"Download completed successfully: {video_file}")
-            if subtitle_file:
-                logger.info(f"Subtitle file: {subtitle_file}")
 
-            return video_file, subtitle_file
+            return video_file
 
         except Exception as e:
             logger.error(f"Download attempt {attempt + 1} failed: {str(e)}")
@@ -155,7 +140,7 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         status_message = await update.message.reply_text("Starting download. Please wait...")
         try:
             logger.info(f"Starting download process for URL: {message_text}")
-            video_file, subtitle_file = await download_video_task(message_text, update, context, status_message)
+            video_file = await download_video_task(message_text, update, context, status_message)
 
             # 检查文件是否存在和可读
             if not os.path.exists(video_file) or not os.access(video_file, os.R_OK):
@@ -167,16 +152,12 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
             with open(video_file, 'rb') as video:
                 await update.message.reply_document(document=video)
 
-            if subtitle_file:
-                if not os.path.exists(subtitle_file) or not os.access(subtitle_file, os.R_OK):
-                    logger.warning(f"Subtitle file not found or not readable: {subtitle_file}")
-                else:
-                    logger.info(f"Sending subtitle file to user: {subtitle_file}")
-                    with open(subtitle_file, 'rb') as subtitle:
-                        await update.message.reply_document(document=subtitle)
-
             logger.info("Download and send process completed successfully")
             await status_message.edit_text("Download completed and files sent!")
+
+            # 删除下载的文件
+            os.remove(video_file)
+            logger.info(f"Deleted downloaded video file: {video_file}")
 
         except FileNotFoundError as e:
             logger.error(f"File not found: {str(e)}")
@@ -214,4 +195,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
