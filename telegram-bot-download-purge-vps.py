@@ -1,8 +1,3 @@
-'''
-添加链接判断功能， 当收到twiiter或者youtube链接时， 使用相应的工具进行下载
-'''
-
-
 import logging
 import re
 import os
@@ -10,24 +5,23 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 from dotenv import load_dotenv
 import concurrent.futures
-import time
 import sys
 import asyncio
 import subprocess
 import uuid
 
-# 加载.env文件中的环境变量
+# Load environment variables from .env file
 load_dotenv()
 
-# 将环境变量中的token赋值给TOKEN
+# Assign the token from the environment variable
 TOKEN = os.getenv('TOKEN')
-# 设置下载目录
+# Set the download directory
 DOWNLOAD_DIR = 'downloads'
 
 if not os.path.exists(DOWNLOAD_DIR):
     os.makedirs(DOWNLOAD_DIR)
 
-# 配置日志记录
+# Configure logging
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -39,7 +33,7 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-# 创建线程池
+# Create a thread pool executor
 executor = concurrent.futures.ThreadPoolExecutor(max_workers=5)
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -72,47 +66,42 @@ def get_url_type(url):
     else:
         return 'unknown'
 
-async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT_TYPE, status_message, url_type, max_retries=3):
+async def download_video_task(url, url_type, update: Update, context: ContextTypes.DEFAULT_TYPE, status_message, max_retries=3):
     """Download video using gallery-dl or yt-dlp depending on URL type."""
     for attempt in range(max_retries):
         try:
             logger.info(f"Starting download attempt {attempt + 1} for URL: {url}")
 
             if url_type == 'twitter':
-                # 构建gallery-dl命令
                 command = [
                     'gallery-dl',
-                    '-v',  # 详细输出
-                    '--write-metadata',  # 写入元数据
-                    '--write-info-json',  # 写入info.json
-                    '-D', DOWNLOAD_DIR,  # 设置下载目录
+                    '-v',
+                    '--write-metadata',
+                    '--write-info-json',
+                    '-D', DOWNLOAD_DIR,
                     url
                 ]
             elif url_type == 'youtube':
-                # 构建yt-dlp命令
                 command = [
                     'yt-dlp',
-                    '-v',  # 详细输出
-                    '--write-info-json',  # 写入info.json
-                    '-o', os.path.join(DOWNLOAD_DIR, '%(title)s.%(ext)s'),  # 设置下载目录和文件名格式
+                    '-v',
+                    '--write-info-json',
+                    '--output', os.path.join(DOWNLOAD_DIR, '%(title)s.%(ext)s'),
                     url
                 ]
             else:
                 raise Exception("Unsupported URL type")
 
-            # 执行命令并捕获输出
             process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
 
             progress = ""
 
-            # 实时处理输出
             while True:
                 output = process.stdout.readline()
                 if output == '' and process.poll() is not None:
                     break
                 if output:
                     logger.debug(output.strip())
-                    # 更新下载进度
                     new_progress = output.strip()
                     if new_progress != progress:
                         progress = new_progress
@@ -121,23 +110,29 @@ async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT
                         except Exception as e:
                             logger.warning(f"Failed to update progress message: {e}")
 
-            # 检查是否有错误
             if process.returncode != 0:
                 error = process.stderr.read()
                 logger.error(f"{url_type} error: {error}")
                 raise Exception(f"{url_type} failed with error: {error}")
 
-            # 找到下载的文件
             video_file = None
             for file in os.listdir(DOWNLOAD_DIR):
-                if file.endswith(".mp4"):
+                if file.endswith(".mp4") or (url_type == 'youtube' and (file.endswith(".mkv") or file.endswith(".webm"))):
                     video_file = os.path.join(DOWNLOAD_DIR, file)
                     break
 
             if not video_file:
                 raise Exception("Downloaded video file not found")
 
-            # 使用UUID重命名文件以确保唯一性
+            if url_type == 'youtube':
+                merged_file = os.path.splitext(video_file)[0] + '_merged.mp4'
+                ffmpeg_command = [
+                    'ffmpeg', '-i', video_file, '-c', 'copy', merged_file
+                ]
+                subprocess.run(ffmpeg_command, check=True)
+                os.remove(video_file)
+                video_file = merged_file
+
             unique_id = str(uuid.uuid4())
             new_video_file = os.path.join(DOWNLOAD_DIR, f"{unique_id}_{os.path.basename(video_file)}")
             os.rename(video_file, new_video_file)
@@ -161,27 +156,29 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     logger.info(f"Received message from user {user.id} ({user.username}): {message_text}")
     if is_url(message_text):
         url_type = get_url_type(message_text)
+        if url_type == 'unknown':
+            await update.message.reply_text("Unsupported URL type. Please send a Twitter or YouTube URL.")
+            return
         status_message = await update.message.reply_text("Starting download. Please wait...")
         try:
             logger.info(f"Starting download process for URL: {message_text} of type {url_type}")
-            video_file = await download_video_task(message_text, update, context, status_message, url_type)
+            video_file = await download_video_task(message_text, url_type, update, context, status_message)
 
-            # 检查文件是否存在和可读
             if not os.path.exists(video_file) or not os.access(video_file, os.R_OK):
                 raise FileNotFoundError(f"Video file not found or not readable: {video_file}")
 
             logger.info(f"Sending video file to user: {video_file}")
 
-            # 使用 with 语句确保文件正确关闭
             with open(video_file, 'rb') as video:
                 await update.message.reply_document(document=video)
 
             logger.info("Download and send process completed successfully")
             await status_message.edit_text("Download completed and files sent!")
 
-            # 删除下载的文件
             os.remove(video_file)
             logger.info(f"Deleted downloaded video file: {video_file}")
+
+            clear_download_dir()
 
         except FileNotFoundError as e:
             logger.error(f"File not found: {str(e)}")
@@ -196,11 +193,21 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         logger.warning(f"User {user.id} ({user.username}) sent invalid URL: {message_text}")
         await update.message.reply_text("This is not a valid URL. Please send a video URL.")
 
+def clear_download_dir():
+    """Clear all files in the download directory."""
+    for file in os.listdir(DOWNLOAD_DIR):
+        file_path = os.path.join(DOWNLOAD_DIR, file)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+                logger.info(f"Deleted file: {file_path}")
+        except Exception as e:
+            logger.error(f"Failed to delete {file_path}. Reason: {str(e)}")
+
 def main() -> None:
     """Start the bot."""
     logger.info("Starting the bot")
 
-    # 创建 Application，不使用代理
     application = (
         Application.builder()
         .token(TOKEN)
