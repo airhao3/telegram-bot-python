@@ -1,7 +1,8 @@
 # .gitignore
 .env
-downloads
+downloads/
 gallery-dl
 .DS_Store
-bot.log
-.vscode
+bot.log/
+.vscode/
+user_cache/
