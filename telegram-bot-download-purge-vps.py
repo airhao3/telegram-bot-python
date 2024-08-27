@@ -9,6 +9,8 @@ import sys
 import asyncio
 import subprocess
 import uuid
+from telegram.request import HTTPXRequest
+
 
 # Load environment variables from .env file
 load_dotenv()
@@ -169,8 +171,19 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
             logger.info(f"Sending video file to user: {video_file}")
 
-            with open(video_file, 'rb') as video:
-                await update.message.reply_document(document=video)
+            max_retries = 3
+            for attempt in range(max_retries):
+                try:
+                    with open(video_file, 'rb') as video:
+                        await update.message.reply_document(document=video)
+                    break  # 如果成功发送，跳出循环
+                except telegram.error.TimedOut:
+                    if attempt < max_retries - 1:
+                        logger.warning(f"Timed out while sending file. Retrying... (Attempt {attempt + 1}/{max_retries})")
+                        await asyncio.sleep(5)  # 等待5秒后重试
+                    else:
+                         raise  # 如果所有重试都失败，则抛出异常
+                     
 
             logger.info("Download and send process completed successfully")
             await status_message.edit_text("Download completed and files sent!")
@@ -186,6 +199,9 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         except OSError as e:
             logger.error(f"OS error: {str(e)}")
             await status_message.edit_text(f"Download failed: System error. Please try again later.")
+        except telegram.error.TimedOut as e:
+            logger.error(f"Timed out while sending file: {str(e)}")
+            await status_message.edit_text("File upload timed out. Please try again with a smaller file or later.")
         except Exception as e:
             logger.error(f"Unexpected error: {str(e)}", exc_info=True)
             await status_message.edit_text(f"An unexpected error occurred. Please try again later.")
@@ -208,9 +224,12 @@ def main() -> None:
     """Start the bot."""
     logger.info("Starting the bot")
 
+    request = HTTPXRequest(connection_pool_size=8, read_timeout=30, write_timeout=30, connect_timeout=30)
+
     application = (
         Application.builder()
         .token(TOKEN)
+        .request(request)
         .build()
     )
 
