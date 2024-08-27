@@ -17,8 +17,17 @@ load_dotenv()
 
 # Assign the token from the environment variable
 TOKEN = os.getenv('TOKEN')
+
 # Set the download directory
-DOWNLOAD_DIR = 'downloads'
+DOWNLOAD_DIR = 'user_cache'
+if not os.path.exists(DOWNLOAD_DIR):
+    os.makedirs(DOWNLOAD_DIR)
+
+def get_user_download_dir(user_name):
+    user_dir = os.path.join(DOWNLOAD_DIR, user_name)
+    if not os.path.exists(user_dir):
+        os.makedirs(user_dir)
+    return user_dir
 
 if not os.path.exists(DOWNLOAD_DIR):
     os.makedirs(DOWNLOAD_DIR)
@@ -69,6 +78,8 @@ def get_url_type(url):
         return 'unknown'
 
 async def download_video_task(url, url_type, update: Update, context: ContextTypes.DEFAULT_TYPE, status_message, max_retries=3):
+    user_id = update.effective_user.id
+    user_cache_dir = get_user_download_dir(str(user_id))
     """Download video using gallery-dl or yt-dlp depending on URL type."""
     for attempt in range(max_retries):
         try:
@@ -80,7 +91,7 @@ async def download_video_task(url, url_type, update: Update, context: ContextTyp
                     '-v',
                     '--write-metadata',
                     '--write-info-json',
-                    '-D', DOWNLOAD_DIR,
+                    '-D', user_cache_dir,
                     url
                 ]
             elif url_type == 'youtube':
@@ -88,7 +99,7 @@ async def download_video_task(url, url_type, update: Update, context: ContextTyp
                     'yt-dlp',
                     '-v',
                     '--write-info-json',
-                    '--output', os.path.join(DOWNLOAD_DIR, '%(title)s.%(ext)s'),
+                    '--output', os.path.join(user_cache_dir, '%(title)s.%(ext)s'),
                     url
                 ]
             else:
@@ -118,9 +129,9 @@ async def download_video_task(url, url_type, update: Update, context: ContextTyp
                 raise Exception(f"{url_type} failed with error: {error}")
 
             video_file = None
-            for file in os.listdir(DOWNLOAD_DIR):
+            for file in os.listdir(user_cache_dir):
                 if file.endswith(".mp4") or (url_type == 'youtube' and (file.endswith(".mkv") or file.endswith(".webm"))):
-                    video_file = os.path.join(DOWNLOAD_DIR, file)
+                    video_file = os.path.join(user_cache_dir, file)
                     break
 
             if not video_file:
@@ -152,6 +163,9 @@ async def download_video_task(url, url_type, update: Update, context: ContextTyp
             await asyncio.sleep(5)  # Wait for 5 seconds before retrying
 
 async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    user = update.effective_user
+    user_cache_dir = get_user_download_dir(str(user.id))
+
     """Handle video download request."""
     user = update.effective_user
     message_text = update.message.text
@@ -191,7 +205,7 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
             os.remove(video_file)
             logger.info(f"Deleted downloaded video file: {video_file}")
 
-            clear_download_dir()
+            clear_user_cache_dir(user_cache_dir)
 
         except FileNotFoundError as e:
             logger.error(f"File not found: {str(e)}")
@@ -208,11 +222,12 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     else:
         logger.warning(f"User {user.id} ({user.username}) sent invalid URL: {message_text}")
         await update.message.reply_text("This is not a valid URL. Please send a video URL.")
+def clear_user_cache_dir(user_id):
+    # 清除用户缓存目录中的所有文件
+    user_cache_dir = get_user_download_dir(str(user_id))
 
-def clear_download_dir():
-    """Clear all files in the download directory."""
-    for file in os.listdir(DOWNLOAD_DIR):
-        file_path = os.path.join(DOWNLOAD_DIR, file)
+    for file in os.listdir(user_cache_dir):
+        file_path = os.path.join(user_cache_dir, file)
         try:
             if os.path.isfile(file_path):
                 os.unlink(file_path)
