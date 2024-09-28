@@ -10,6 +10,7 @@ import asyncio
 import subprocess
 import uuid
 from telegram.request import HTTPXRequest
+from telegram.error import TimedOut
 
 
 # Load environment variables from .env file
@@ -191,13 +192,13 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
                     with open(video_file, 'rb') as video:
                         await update.message.reply_document(document=video)
                     break  # 如果成功发送，跳出循环
-                except telegram.error.TimedOut:
-                    if attempt < max_retries - 1:
-                        logger.warning(f"Timed out while sending file. Retrying... (Attempt {attempt + 1}/{max_retries})")
-                        await asyncio.sleep(5)  # 等待5秒后重试
-                    else:
-                         raise  # 如果所有重试都失败，则抛出异常
-                     
+                except TimedOut:
+                    # 处理超时错误
+                    await update.message.reply_text("发送文件时超时。请稍后再试。")
+                except Exception as e:
+                    # 处理其他可能的错误
+                    logger.error(f"发送文件时发生错误: {str(e)}")
+                    await update.message.reply_text("发送文件时发生错误。请稍后再试。")
 
             logger.info("Download and send process completed successfully")
             await status_message.edit_text("Download completed and files sent!")
@@ -213,9 +214,6 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         except OSError as e:
             logger.error(f"OS error: {str(e)}")
             await status_message.edit_text(f"Download failed: System error. Please try again later.")
-        except telegram.error.TimedOut as e:
-            logger.error(f"Timed out while sending file: {str(e)}")
-            await status_message.edit_text("File upload timed out. Please try again with a smaller file or later.")
         except Exception as e:
             logger.error(f"Unexpected error: {str(e)}", exc_info=True)
             await status_message.edit_text(f"An unexpected error occurred. Please try again later.")
