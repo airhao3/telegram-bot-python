@@ -217,9 +217,25 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         except Exception as e:
             logger.error(f"Unexpected error: {str(e)}", exc_info=True)
             await status_message.edit_text(f"An unexpected error occurred. Please try again later.")
+    elif is_instagram_link(message_text):  # 检查是否为Instagram链接
+        await update.message.reply_text("开始下载 Instagram 视频，请稍候...")
+        result = download_instagram_video(message_text)  # 调用下载函数
+        if result:
+            video_url = result.get("video_url")
+            thumbnail_url = result.get("thumbnail_url")
+            if video_url:
+                # 发送视频文件
+                await update.message.reply_text("视频下载完成，正在发送...")
+                with open(video_path, 'rb') as video:
+                    await update.message.reply_document(document=video)
+            else:
+                await update.message.reply_text("未能获取视频链接，请检查链接是否有效。")
+        else:
+            await update.message.reply_text("下载过程中发生错误，请稍后再试。")
     else:
         logger.warning(f"User {user.id} ({user.username}) sent invalid URL: {message_text}")
-        await update.message.reply_text("This is not a valid URL. Please send a video URL.")
+        await update.message.reply_text("这不是一个有效的链接，请发送一个视频链接。")
+
 def clear_user_cache_dir(user_id):
     # 清除用户缓存目录中的所有文件
     user_cache_dir = get_user_download_dir(str(user_id))
