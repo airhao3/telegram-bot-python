@@ -21,7 +21,8 @@
    ```
    pip install -r requirements.txt
    ```
-
+   
+   udo apt-get install -y libxss1 libappindicator3-1 libindicator7
 3. 安装系统依赖:
    - FFmpeg (用于音频处理)
    - gallery-dl (用于Twitter视频下载)

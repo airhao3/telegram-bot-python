@@ -41,10 +41,15 @@ def initialize_driver():
         chrome_options.add_argument("--user-data-dir=/tmp/chrome-user-data")  # 设置用户数据目录
         chrome_options.add_argument("--remote-debugging-port=9222")  # 设置远程调试端口
         chrome_options.page_load_strategy = 'normal'  # 使用正常的页面加载策略
+        chrome_options.page_load_timeout = 30  # 设置页面加载超时为30秒
+        
+        # 添加以下选项以解决无头模式问题
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
 
         logger.info("正在初始化 Chrome driver...")
         service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=chrome_options)
+        driver = webdriver.Chrome(service=service, options=chrome_options)  # 移除 timeout 参数
         logger.info("Chrome driver 初始化成功")
 
 def random_sleep(min_seconds, max_seconds):
@@ -284,8 +289,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 def main() -> None:
     initialize_driver()
 
-    application = Application.builder().token(TOKEN).build()
-
+    application = Application.builder().token(TOKEN).build()  # 移除 request_kwargs
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
