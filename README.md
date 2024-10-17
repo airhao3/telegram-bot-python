@@ -28,12 +28,53 @@
    - yt-dlp (用于YouTube视频下载)
    - Selenium (用于Instagram视频下载)
 
-4. 创建一个`.env`文件，并添加您的Telegram Bot Token:
+4. 在无 GUI 环境中安装 Google Chrome:
+   - **在 Ubuntu/Debian 上**：
+     ```bash
+     sudo apt update
+     sudo apt install -y wget
+     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+     sudo apt install -y ./google-chrome-stable_current_amd64.deb
+     rm google-chrome-stable_current_amd64.deb
+     ```
+
+   - **在 CentOS/RHEL 上**：
+     ```bash
+     sudo yum install -y wget
+     wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+     sudo yum localinstall -y google-chrome-stable_current_x86_64.rpm
+     rm google-chrome-stable_current_x86_64.rpm
+     ```
+
+   - **在 Fedora 上**：
+     ```bash
+     sudo dnf install -y wget
+     wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+     sudo dnf localinstall -y google-chrome-stable_current_x86_64.rpm
+     rm google-chrome-stable_current_x86_64.rpm
+     ```
+
+   - **在 Docker 容器中**：
+     ```dockerfile
+     FROM ubuntu:20.04
+
+     RUN apt-get update && apt-get install -y \
+         wget \
+         gnupg2 \
+         && wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+         && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+         && apt-get update \
+         && apt-get install -y google-chrome-stable \
+         && apt-get clean \
+         && rm -rf /var/lib/apt/lists/*
+     ```
+
+5. 创建一个`.env`文件，并添加您的Telegram Bot Token:
    ```
    TOKEN=your_telegram_bot_token_here
    ```
 
-5. 设置Webhook:
+6. 设置Webhook:
    - 确保您有一个带SSL证书的公共域名
    - 使用以下命令设置webhook:
      ```
@@ -42,7 +83,7 @@
    - 将`your_domain.com/your_bot_path`替换为您的实际域名和机器人路径
    - 将`<YOUR_BOT_TOKEN>`替换为您的实际bot token
 
-6. 测试Webhook设置:
+7. 测试Webhook设置:
    - 使用以下命令检查webhook的当前状态:
      ```
      curl https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getWebhookInfo
@@ -61,7 +102,7 @@
      }
      ```
    - 确保"url"字段与您设置的URL匹配
-   - 如果看到错误或URL不匹配，请重新检查您的设置并重新执行步骤5
+   - 如果看到错误或URL不匹配，请重新检查您的设置并重新执行步骤6
 
 ## 使用方法
 
