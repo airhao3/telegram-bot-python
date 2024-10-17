@@ -1,18 +1,19 @@
 # Telegram 视频下载机器人
 
-这是一个功能强大的Telegram机器人,可以下载Twitter、YouTube和Instagram视频。
+这是一个功能强大的Telegram机器人，可以下载Twitter、YouTube和Instagram视频。
 
 ## 功能特点
 
 - 支持下载Twitter、YouTube和Instagram视频
 - 使用Whisper进行语音识别(STT)
 - 自动清理用户缓存
+- 支持从Instagram下载视频和缩略图
 
 ## 安装
 
 1. 克隆此仓库:
    ```
-   git clone https://github.com/yourusername/telegram-video-download-bot.git
+   git clone https://github.com/airhao3/telegram-video-download-bot.git
    cd telegram-video-download-bot
    ```
 
@@ -25,8 +26,9 @@
    - FFmpeg (用于音频处理)
    - gallery-dl (用于Twitter视频下载)
    - yt-dlp (用于YouTube视频下载)
+   - Selenium (用于Instagram视频下载)
 
-4. 创建一个`.env`文件,并添加您的Telegram Bot Token:
+4. 创建一个`.env`文件，并添加您的Telegram Bot Token:
    ```
    TOKEN=your_telegram_bot_token_here
    ```
@@ -45,7 +47,7 @@
      ```
      curl https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getWebhookInfo
      ```
-   - 如果设置成功,您应该看到类似以下的响应:
+   - 如果设置成功，您应该看到类似以下的响应:
      ```json
      {
        "ok": true,
@@ -59,7 +61,7 @@
      }
      ```
    - 确保"url"字段与您设置的URL匹配
-   - 如果看到错误或URL不匹配,请重新检查您的设置并重新执行步骤5
+   - 如果看到错误或URL不匹配，请重新检查您的设置并重新执行步骤5
 
 ## 使用方法
 
@@ -76,11 +78,12 @@
 ## 注意事项
 
 - 请确保您有足够的磁盘空间来存储下载的视频。
-- 对于大文件,下载和处理可能需要一些时间。
+- 对于大文件，下载和处理可能需要一些时间。
+- Instagram视频下载依赖于Selenium和Chrome驱动，请确保您的环境中已正确配置。
 
 ## 贡献
 
-欢迎提交问题报告和拉取请求。对于重大更改,请先开issue讨论您想要改变的内容。
+欢迎提交问题报告和拉取请求。对于重大更改，请先开issue讨论您想要改变的内容。
 
 ## CHANGELOG
 
@@ -89,6 +92,11 @@
 - 支持下载Twitter、YouTube和Instagram视频
 - 添加语音识别功能
 - 自动清理用户缓存
+
+### [1.1.0] - 2024-10-17
+- 添加Instagram视频下载功能
+- 支持下载视频和缩略图
+- 增强错误处理和日志记录
 
 ## 许可证
 
