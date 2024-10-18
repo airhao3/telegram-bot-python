@@ -36,17 +36,21 @@ def initialize_driver():
     global driver
     if driver is None:
         chrome_options = Options()
-        chrome_options.add_argument("--headless")
-        chrome_options.add_argument("--start-maximized")
-        chrome_options.add_argument("--disable-extensions")
-        chrome_options.add_argument("--disable-infobars")
-        chrome_options.add_argument("--disable-notifications")
-        chrome_options.page_load_strategy = 'normal'
+        chrome_options.add_argument("--headless")  # 启用无头模式
+        chrome_options.add_argument("--disable-gpu")  # 禁用 GPU 加速
+        chrome_options.add_argument("--user-data-dir=/tmp/chrome-user-data")  # 设置用户数据目录
+        chrome_options.add_argument("--remote-debugging-port=9222")  # 设置远程调试端口
+        chrome_options.page_load_strategy = 'normal'  # 使用正常的页面加载策略
+        chrome_options.page_load_timeout = 30  # 设置页面加载超时为30秒
+        
+        # 添加以下选项以解决无头模式问题
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
 
-        logger.info("Initializing Chrome driver...")
+        logger.info("正在初始化 Chrome driver...")
         service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=chrome_options)
-        logger.info("Chrome driver initialized successfully")
+        driver = webdriver.Chrome(service=service, options=chrome_options)  # 移除 timeout 参数
+        logger.info("Chrome driver 初始化成功")
 
 def random_sleep(min_seconds, max_seconds):
     time.sleep(random.uniform(min_seconds, max_seconds))
@@ -285,8 +289,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 def main() -> None:
     initialize_driver()
 
-    application = Application.builder().token(TOKEN).build()
-
+    application = Application.builder().token(TOKEN).build()  # 移除 request_kwargs
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
