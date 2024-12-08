@@ -1,6 +1,7 @@
 # .gitignore
 .env
 downloads/
+download/
 gallery-dl
 .DS_Store
 bot.log/
