@@ -11,29 +11,28 @@ from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from concurrent.futures import ThreadPoolExecutor
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
-from webdriver_manager.chrome import ChromeDriverManager
 from telegram.error import TimedOut, NetworkError
 import backoff  # 需要安装: pip install backoff
 import threading
+import json
+
+import ssl
+import httpx
+from telegram.request import HTTPXRequest
+import socket
 
 # Load environment variables and set up logging
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 DOWNLOAD_DIR = "download"
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
+COBALT_API_URL = os.getenv('COBALT_API_URL', "http://cvatserver.me:9999/")  # Default to your address, if not provided in .env
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 # Global variables
-driver = None
+# driver = None (no longer needed)
 
 # 添加全局线程池配置
 MAX_WORKERS = 3  # 最大工作线程数
@@ -41,204 +40,70 @@ download_executor = ThreadPoolExecutor(max_workers=MAX_WORKERS)
 active_downloads = {}  # 用于追踪活跃下载任务
 download_lock = threading.Lock()  # 用于同步访问 active_downloads
 
-def initialize_driver():
-    global driver
-    if driver is None:
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")  # 启用无头模式
-        chrome_options.add_argument("--disable-gpu")  # 禁用 GPU 加速
-        chrome_options.add_argument("--user-data-dir=/tmp/chrome-user-data")  # 设置用户数据目录
-        chrome_options.add_argument("--remote-debugging-port=9222")  # 设置远程调试端口
-        chrome_options.page_load_strategy = 'normal'  # 使用正常的页面加载策略
-        chrome_options.page_load_timeout = 30  # 设置页面加载超时为30秒
-        
-        # 添加以下选项以解决无头模式问题
-        chrome_options.add_argument("--no-sandbox")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-
-        logger.info("正在初始化 Chrome driver...")
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=chrome_options)  # 移除 timeout 参数
-        logger.info("Chrome driver 初始化成功")
-
-def random_sleep(min_seconds, max_seconds):
-    time.sleep(random.uniform(min_seconds, max_seconds))
-
-def human_like_input(element, text):
-    for char in text:
-        element.send_keys(char)
-        random_sleep(0.05, 0.15)
-
-def handle_popups():
-    try:
-        cookie_accept_button = WebDriverWait(driver, 5).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Accept')]"))
-        )
-        cookie_accept_button.click()
-        logger.info("Accepted cookie policy")
-    except Exception as e:
-        logger.warning("Cookie accept popup not found or not clickable: %s", e)
-
-    try:
-        close_button = WebDriverWait(driver, 5).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Close')]"))
-        )
-        close_button.click()
-        logger.info("Closed popup")
-    except Exception as e:
-        logger.warning("Close popup button not found: %s", e)
-
 def is_url(text):
     url_pattern = re.compile(
         r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
     )
     return bool(url_pattern.match(text))
 
-def get_url_type(url):
-    if 'instagram.com' in url:
-        return 'instagram'
-    elif 'twitter.com' in url or 'x.com' in url:
-        return 'twitter'
-    elif 'youtube.com' in url or 'youtu.be' in url:
-        return 'youtube'
-    elif 'tiktok.com' in url or 'vt.tiktok.com' in url or 'vm.tiktok.com' in url:
-        return 'tiktok'
-    else:
-        return 'unknown'
+# def get_url_type(url):
+#     if 'instagram.com' in url:
+#         return 'instagram'
+#     elif 'twitter.com' in url or 'x.com' in url:
+#         return 'twitter'
+#     elif 'youtube.com' in url or 'youtu.be' in url:
+#         return 'youtube'
+#     elif 'tiktok.com' in url or 'vt.tiktok.com' in url or 'vm.tiktok.com' in url:
+#         return 'tiktok'
+#     else:
+#         return 'unknown'
+# removed link type detection since all downloads will go through cobalt api.
 
-async def download_instagram_video(instagram_link, user_cache_dir):
-    global driver
+async def fetch_video_with_cobalt(url):
+    """Fetches a video using the Cobalt API."""
+    headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    }
+    data = {"url": url}
+
     try:
-        logger.info("访问 SaveVid 网站...")
-        driver.get("https://savevid.net/en")
-        logger.info(f"页面标题: {driver.title}")
-
-        # 等待页面加载
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-
-        # 查找输入框
-        input_box = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "#s_input"))
-        )
-        
-        # 直接输入链接
-        input_box.clear()
-        input_box.send_keys(instagram_link)
-        logger.info(f"已输入 Instagram 链接: {instagram_link}")
-
-        # 点击提交按钮
-        try:
-            submit_button = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.ID, "btn_submit"))
-            )
-            submit_button.click()
-        except Exception as e:
-            logger.error(f"提交按钮点击失败，尝试回车提交: {e}")
-            input_box.send_keys(Keys.RETURN)
-
-        logger.info("表单已提交")
-
-        # 等待下载链接出现
-        WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "download-items"))
-        )
-        logger.info("Search results loaded")
-
-        # 获取下载链接
-        download_links = driver.find_elements(By.CSS_SELECTOR, ".download-items .abutton")
-        if download_links:
-            logger.info("Found download links")
-            video_url = next((link.get_attribute('href') for link in download_links if "Download Video" in link.text), None)
-            
-            if video_url:
-                logger.info("Successfully obtained video link")
-                file_uuid = str(uuid.uuid4())
-                video_path = os.path.join(user_cache_dir, f"{file_uuid}.mp4")
-                
-                # 下载视频
-                response = requests.get(video_url, stream=True)
-                with open(video_path, 'wb') as f:
-                    for chunk in response.iter_content(chunk_size=8192):
-                        f.write(chunk)
-                
-                logger.info(f"Instagram video downloaded: {video_path}")
-                return video_path
-            else:
-                raise Exception("Failed to obtain video link")
-        else:
-            raise Exception("No download links found")
-
-    except Exception as e:
-        logger.exception(f"Error occurred during Instagram download: {e}")
+        response = requests.post(COBALT_API_URL, headers=headers, json=data)
+        response.raise_for_status()  # Raises an exception for bad status codes
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        logger.error(f"请求 Cobalt API 失败: {e}")
         return None
 
-async def download_tiktok_video(tiktok_link, user_cache_dir):
-    global driver
+async def download_video_from_url(url, user_cache_dir):
+    """下载视频从链接"""
     try:
-        logger.info("访问 SaveTik 网站...")
-        driver.get("https://savetik.net/en2")
-        logger.info(f"页面标题: {driver.title}")
+        response = await fetch_video_with_cobalt(url)
+        if not response or 'url' not in response:
+            logger.error("没有返回有效的下载链接 from cobalt api")
+            return None
 
-        # 等待页面加载并定位输入框
-        input_box = WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "#url"))
-        )
+        download_url = response['url']
+        file_uuid = str(uuid.uuid4())
+        video_path = os.path.join(user_cache_dir, f"{file_uuid}.mp4")
+        logger.info(f"开始下载视频，下载链接为: {download_url}")
 
-        # 输入链接
-        input_box.clear()
-        input_box.send_keys(tiktok_link)
-        logger.info(f"已输入 TikTok 链接: {tiktok_link}")
-
-        # 点击提交按钮
-        submit_button = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
-        submit_button.click()
-        logger.info("已提交下载请求")
-
-        # 直接使用 XPath 等待并获取下载链接
-        download_link = WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.XPATH, "/html/body/div/div/main/div[2]/div[2]/a"))
-        )
-        video_url = download_link.get_attribute('href')
-        
-        if video_url:
-            logger.info(f"成功获取视频链接: {video_url}")
-            file_uuid = str(uuid.uuid4())
-            video_path = os.path.join(user_cache_dir, f"{file_uuid}.mp4")
-            
-            # 下载视频
-            headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0.4472.124 Safari/537.36',
-                'Referer': 'https://savetik.net/'
-            }
-            
-            response = requests.get(video_url, headers=headers, stream=True, timeout=30)
-            response.raise_for_status()
-            
+        # Download the video
+        with requests.get(download_url, stream=True, timeout=30) as r:
+            r.raise_for_status()  # Raise an exception for bad status codes
             with open(video_path, 'wb') as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    if chunk:
-                        f.write(chunk)
-            
-            if os.path.exists(video_path) and os.path.getsize(video_path) > 0:
-                logger.info(f"TikTok 视频下载完成: {video_path}")
-                return video_path
-            else:
-                raise Exception("下载的文件无效")
+                for chunk in r.iter_content(chunk_size=8192):
+                    f.write(chunk)
 
-        else:
-            raise Exception("无法获取视频下载链接")
+        logger.info(f"下载成功到: {video_path}")
+        return video_path
 
     except Exception as e:
-        logger.exception(f"TikTok 下载过程中出错: {e}")
+        logger.exception(f"下载视频失败: {e}")
         return None
-    finally:
-        # 清理可能的弹窗或提示
-        try:
-            driver.execute_script("window.onbeforeunload = null;")
-        except Exception:
-            pass
 
-async def download_video_task(url, url_type, update: Update, context: ContextTypes.DEFAULT_TYPE, status_message, max_retries=3):
+
+async def download_video_task(url,  update: Update, context: ContextTypes.DEFAULT_TYPE, status_message, max_retries=3):
     user_id = update.effective_user.id
     user_cache_dir = os.path.join(DOWNLOAD_DIR, str(user_id))
     os.makedirs(user_cache_dir, exist_ok=True)
@@ -246,62 +111,8 @@ async def download_video_task(url, url_type, update: Update, context: ContextTyp
     for attempt in range(max_retries):
         try:
             logger.info(f"Starting download attempt {attempt + 1} for URL: {url}")
+            video_file = await download_video_from_url(url, user_cache_dir)
 
-            if url_type == 'instagram':
-                video_file = await download_instagram_video(url, user_cache_dir)
-            elif url_type == 'tiktok':
-                video_file = await download_tiktok_video(url, user_cache_dir)
-            elif url_type in ['twitter', 'youtube']:
-                if url_type == 'twitter':
-                    command = [
-                        'gallery-dl', '-v', '--write-metadata', '--write-info-json',
-                        '-D', user_cache_dir, url
-                    ]
-                else:  # youtube
-                    command = [
-                        'yt-dlp', '-v', '--write-info-json',
-                        '--output', os.path.join(user_cache_dir, '%(title)s.%(ext)s'),
-                        url
-                    ]
-
-                process = await asyncio.create_subprocess_exec(
-                    *command,
-                    stdout=asyncio.subprocess.PIPE,
-                    stderr=asyncio.subprocess.PIPE
-                )
-
-                while True:
-                    line = await process.stdout.readline()
-                    if not line:
-                        break
-                    progress = line.decode().strip()
-                    try:
-                        await status_message.edit_text(f"Downloading: {progress}")
-                    except Exception as e:
-                        logger.warning(f"Failed to update progress message: {e}")
-
-                await process.wait()
-                if process.returncode != 0:
-                    error = await process.stderr.read()
-                    raise RuntimeError(f"{url_type} download failed with error: {error.decode()}")
-
-                video_file = next(
-                    (os.path.join(user_cache_dir, f) for f in os.listdir(user_cache_dir)
-                     if f.endswith((".mp4", ".mkv", ".webm"))),
-                    None
-                )
-
-                if not video_file:
-                    raise FileNotFoundError("Downloaded video file not found")
-
-                if url_type == 'youtube' and not video_file.endswith('.mp4'):
-                    merged_file = f"{os.path.splitext(video_file)[0]}_merged.mp4"
-                    ffmpeg_command = ['ffmpeg', '-i', video_file, '-c', 'copy', merged_file]
-                    await asyncio.create_subprocess_exec(*ffmpeg_command)
-                    os.remove(video_file)
-                    video_file = merged_file
-            else:
-                raise ValueError("Unsupported URL type")
 
             if not video_file:
                 raise FileNotFoundError("Video file not found after download")
@@ -319,14 +130,16 @@ async def download_video_task(url, url_type, update: Update, context: ContextTyp
                 raise
             await asyncio.sleep(5)
 
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text('Welcome! Send me a YouTube, Twitter, or Instagram video link to download.')
+    await update.message.reply_text('Welcome! Send me a video link to download.')
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     start_time = time.time()
     user = update.effective_user
     message_text = update.message.text
-    
+    status_message = None
+
     # 检查用户是否可以开始新的下载
     if not await manage_download_tasks(user.id):
         await update.message.reply_text(
@@ -343,12 +156,12 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
             await update.message.reply_text("Please send a valid video link.")
             return
 
-        url_type = get_url_type(message_text)
-        if url_type == 'unknown':
-            with download_lock:
-                active_downloads[user.id] -= 1
-            await update.message.reply_text("Unsupported URL type. Please send a YouTube, Twitter, or Instagram URL.")
-            return
+        # url_type = get_url_type(message_text)
+        # if url_type == 'unknown':
+        #     with download_lock:
+        #         active_downloads[user.id] -= 1
+        #     await update.message.reply_text("Unsupported URL type. Please send a YouTube, Twitter, or Instagram URL.")
+        #     return
 
         status_message = await update.message.reply_text("Starting download. Please wait...")
         
@@ -359,7 +172,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
             video_file = await loop.run_in_executor(
                 download_executor,
                 lambda: asyncio.run(download_video_task(
-                    message_text, url_type, update, context, status_message
+                    message_text, update, context, status_message
                 ))
             )
             download_end = time.time()
@@ -388,7 +201,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
             
             # 记录详细日志
             logger.info(
-                f"处理完成 - URL类型: {url_type}\n"
+                f"处理完成 - URL类型: all via cobalt \n"
                 f"总耗时: {total_time:.2f}秒\n"
                 f"下载耗时: {download_duration:.2f}秒\n"
                 f"发送耗时: {send_duration:.2f}秒"
@@ -396,8 +209,9 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
             
         except Exception as e:
             total_time = time.time() - start_time
-            logger.error(f"发送文件失败: {str(e)}")
-            await status_message.edit_text(
+            logger.error(f"发送件失败: {str(e)}")
+            if status_message is not None:
+              await status_message.edit_text(
                 f"文件发送失败，请稍后重试。\n"
                 f"总耗时: {total_time:.2f}秒\n"
                 f"下载耗时: {download_duration:.2f}秒"
@@ -413,8 +227,9 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
     except Exception as e:
         logger.error(f"Error during download and send process: {str(e)}", exc_info=True)
-        await status_message.edit_text(f"An error occurred. Please try again later.")
-        # 确保在错误情况下也减少下��计数
+        if status_message is not None:
+            await status_message.edit_text(f"An error occurred. Please try again later.")
+        # 确保在错误情况下也减少下载计数
         with download_lock:
             active_downloads[user.id] = max(0, active_downloads.get(user.id, 1) - 1)
 
@@ -528,8 +343,20 @@ async def cleanup_download_counts():
 
 def main() -> None:
     try:
-        initialize_driver()
-        application = Application.builder().token(TOKEN).build()
+        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+        
+        def create_ssl_connection(*args, **kwargs):
+            sock = socket.create_connection(*args, **kwargs)
+            ssl_sock = ssl_context.wrap_socket(sock, server_hostname=kwargs.get("server_hostname"))
+            return ssl_sock
+        
+        transport = httpx.AsyncHTTPTransport()
+        
+        http_client = httpx.AsyncClient(verify=True)
+        
+        http_request = HTTPXRequest()
+        
+        application = Application.builder().token(TOKEN).request(http_request).build()
         application.add_handler(CommandHandler("start", start))
         application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
@@ -540,8 +367,6 @@ def main() -> None:
         # 运行应用
         application.run_polling()
     finally:
-        if driver:
-            driver.quit()
         download_executor.shutdown(wait=True)
 
 if __name__ == "__main__":
