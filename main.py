@@ -26,7 +26,7 @@ load_dotenv()
 TOKEN = os.getenv('TOKEN')
 DOWNLOAD_DIR = "download"
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
-COBALT_API_URL = os.getenv('COBALT_API_URL', "http://cvatserver.me:9999/")  # Default to your address, if not provided in .env
+COBALT_API_URL = os.getenv('COBALT_API_URL', "http://localhost:9999/")  # Default to your address, if not provided in .env
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)

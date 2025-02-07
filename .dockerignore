@@ -1,0 +1,20 @@
+# Git
+.git
+.gitignore
+
+# Downloaded files
+download/
+nohup.out
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment
+.env
+.env.example
+
+# IDE
+.vscode/
+.idea/

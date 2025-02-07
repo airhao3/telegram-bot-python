@@ -1,148 +1,129 @@
 # Telegram 视频下载机器人
 
-一个功能强大的 Telegram 机器人，支持从多个平台下载视频。
+一个轻量级的 Telegram 视频下载机器人，基于 Cobalt API 实现多平台视频下载功能。本项目采用 Docker 容器化部署，使部署和管理变得简单高效。
+
+## 项目说明
+
+本项目使用 Cobalt API 进行视频下载，相比之前版本有以下优势：
+- 更轻量级的部署方案，无需安装浏览器
+- 更稳定的下载体验
+- 更快的响应速度
+- 更简单的维护方式
 
 ## 功能特点
 
+### 下载功能
 - 多平台视频下载支持：
-  - Instagram 视频下载
-  - Twitter 视频下载
-  - YouTube 视频下载
+  - Instagram 视频和照片下载
+  - Twitter/X 平台视频下载
+  - YouTube 视频下载（支持选择质量）
   - TikTok 无水印视频下载
-- 并发下载支持（每用户最多 2 个同时下载）
-- 自动文件大小检查（限制 50MB）
-- 自动重试机制
-- 详细的下载进度显示
-- 完整的时间统计
+  - 其他平台支持（详见 Cobalt API 文档）
+
+### 系统特性
+- 异步下载处理
 - 自动清理临时文件
+- 智能文件大小管理
+- 优雅的错误处理
+- 用户友好的进度提示
 
-## 系统要求
+## 部署指南
 
-- Python 3.8+
-- Google Chrome
-- FFmpeg
-- 稳定的网络连接
-- 足够的存储空间
+### 环境要求
+- Docker 环境
+- Telegram Bot Token（从 @BotFather 获取）
+- Cobalt API Token（可选，用于提高下载限制）
 
-## 安装步骤
+### 快速部署
 
-1. 克隆仓库：
+1. 获取项目代码：
+   ```bash
+   git clone https://github.com/airhao3/telegram-bot-python.git
+   cd telegram-bot-python
+   ```
+
+2. 配置环境变量：
+   ```bash
+   cp .env.example .env
+   # 编辑 .env 文件，填入必要的配置信息
+   ```
+
+3. 构建并启动：
+   ```bash
+   # 构建 Docker 镜像
+   docker build -t telegram-video-bot .
+   
+   # 运行容器
+   docker run -d \
+     --name telegram-video-bot \
+     --restart unless-stopped \
+     -v $(pwd)/download:/app/download \
+     --env-file .env \
+     telegram-video-bot
+   ```
+
+### 维护管理
+
 ```bash
-git clone https://github.com/yourusername/telegram-video-download-bot.git
-cd telegram-video-download-bot
+# 查看运行日志
+docker logs -f telegram-video-bot
+
+# 更新机器人
+docker pull telegram-video-bot
+docker restart telegram-video-bot
+
+# 停止/启动服务
+docker stop telegram-video-bot
+docker start telegram-video-bot
 ```
 
-2. 安装依赖：
-```bash
-pip install -r requirements.txt
-```
+## 使用说明
 
-3. 安装系统依赖：
+1. 在 Telegram 中找到您的机器人
+2. 发送视频链接给机器人
+3. 等待机器人处理并发送视频
 
-Ubuntu/Debian:
-```bash
-# 安装 Chrome
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.deb
+### 支持的链接格式
+- Instagram: https://www.instagram.com/p/xxx
+- Twitter/X: https://twitter.com/xxx/status/xxx
+- YouTube: https://youtube.com/watch?v=xxx
+- TikTok: https://www.tiktok.com/@xxx/video/xxx
 
-# 安装其他依赖
-sudo apt-get update
-sudo apt-get install -y ffmpeg
-```
+### 注意事项
+- 视频大小限制为 50MB（可在配置中调整）
+- 下载较大视频时会自动压缩
+- 每个用户同时最多处理 2 个下载任务
+- 临时文件会在下载完成后自动清理
 
-macOS:
-```bash
-# 使用 Homebrew 安装依赖
-brew install --cask google-chrome
-brew install ffmpeg
-```
-
-4. 配置环境变量：
-创建 `.env` 文件并添加：
-```plaintext
-TOKEN=your_telegram_bot_token_here
-```
-
-## 使用方法
-
-1. 启动机器人：
-```bash
-python main.py
-```
-
-2. 在 Telegram 中：
-   - 发送 `/start` 开始使用
-   - 直接发送视频链接即可下载
-   - 支持的链接格式：
-     - Instagram: `https://www.instagram.com/p/xxx`
-     - Twitter: `https://twitter.com/xxx/status/xxx`
-     - YouTube: `https://youtube.com/watch?v=xxx`
-     - TikTok: `https://www.tiktok.com/@xxx/video/xxx`
-
-## 性能统计
-
-每次下载都会显示详细的时间统计：
-- 总处理时间
-- 下载耗时
-- 发送耗时
-
-## 注意事项
-
-1. 文件大小限制：
-   - Telegram 限制文件大小不超过 50MB
-   - 超过限制的文件将无法发送
-
-2. 并发限制：
-   - 每个用户最多同时下载 2 个视频
-   - 超过限制需等待当前下载完成
-
-3. 网络要求：
-   - 需要稳定的网络连接
-   - 建议使用代理以提高访问速度
-
-4. 存储空间：
-   - 自动清理下载的临时文件
-   - 建议预留足够的磁盘空间
-
-## 故障排除
-
-1. 下载失败：
-   - 检查网络连接
-   - 确认链接是否有效
-   - 查看日志文件获取详细错误信息
-
-2. 发送失败：
-   - 检查文件大小是否超限
-   - 确认 bot token 是否有效
-   - 尝试重新发送
-
-3. TikTok 下载问题：
-   - 确保链接格式正确
-   - 检查是否为私密视频
-   - 尝试使用分享链接
 
 ## 更新日志
+
+### [2.0.0] - 2025-02-07
+- 重大更新：迁移至 Cobalt API
+- 移除 Chrome 依赖，大幅减小部署体积
+- 优化下载稳定性
+- 提升响应速度
+- 简化维护流程
 
 ### [1.2.0] - 2024-01-20
 - 添加 TikTok 无水印视频下载支持
 - 添加并发下载限制
 - 优化下载速度
-- 添加详细的时间统计
 
 ### [1.1.0] - 2024-01-15
 - 添加下载时间统计
-- 优化下载速度
 - 改进错误处理
+- 优化用户体验
 
 ### [1.0.0] - 2024-01-01
 - 初始发布
 - 支持多平台视频下载
-- 添加自动重试机制
+- 基于 Selenium 和 Chrome 的下载实现
 
 ## 贡献
 
-欢迎提交 Issues 和 Pull Requests！
+欢迎提交 Issues 和 Pull Requests！如果你有任何问题或建议，请随时与我们联系。
 
 ## 许可证
 
-[MIT](LICENSE)
+本项目采用 [MIT](LICENSE) 许可证。
