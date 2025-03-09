@@ -1,373 +1,358 @@
 import logging
 import os
 import re
-import requests
 import uuid
 import time
-import random
 import asyncio
-import subprocess
+import sys
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
-from concurrent.futures import ThreadPoolExecutor
 from telegram.error import TimedOut, NetworkError
-import backoff  # 需要安装: pip install backoff
+import backoff
 import threading
 import json
+import psutil
 
 import ssl
 import httpx
 from telegram.request import HTTPXRequest
-import socket
 
-# Load environment variables and set up logging
+# 导入自定义模块
+from utils.resource_monitor import ResourceMonitor
+from utils.download_manager import DownloadManager
+from utils.video_processor import VideoProcessor
+from utils.instance_manager import SingleInstanceManager
+
+# 加载环境变量和设置日志
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 DOWNLOAD_DIR = "download"
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
-COBALT_API_URL = os.getenv('COBALT_API_URL', "http://localhost:9999/")  # Default to your address, if not provided in .env
+COBALT_API_URL = os.getenv('COBALT_API_URL', "http://localhost:9999/")
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# Global variables
-# driver = None (no longer needed)
+# 初始化资源管理器和下载管理器
+resource_monitor = ResourceMonitor(memory_threshold=75, min_memory_available=500)
+download_manager = DownloadManager(
+    max_workers=8,  # 基于CPU核心数(4)的2倍优化线程数
+    max_concurrent_per_user=3,  # 每个用户的最大并发下载数
+    download_timeout=180,  # 下载超时时间（秒）
+    max_retries=3,  # 最大重试次数
+    max_file_size=2000,  # 最大文件大小限制(MB)
+    download_dir=DOWNLOAD_DIR
+)
+video_processor = VideoProcessor(max_size_mb=50)
 
-# 添加全局线程池配置
-MAX_WORKERS = 3  # 最大工作线程数
-download_executor = ThreadPoolExecutor(max_workers=MAX_WORKERS)
-active_downloads = {}  # 用于追踪活跃下载任务
-download_lock = threading.Lock()  # 用于同步访问 active_downloads
+# 定期任务锁
+scheduled_task_lock = threading.Lock()
 
+# URL验证函数
 def is_url(text):
+    """检查文本是否为URL"""
     url_pattern = re.compile(
         r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
     )
     return bool(url_pattern.match(text))
 
-# def get_url_type(url):
-#     if 'instagram.com' in url:
-#         return 'instagram'
-#     elif 'twitter.com' in url or 'x.com' in url:
-#         return 'twitter'
-#     elif 'youtube.com' in url or 'youtu.be' in url:
-#         return 'youtube'
-#     elif 'tiktok.com' in url or 'vt.tiktok.com' in url or 'vm.tiktok.com' in url:
-#         return 'tiktok'
-#     else:
-#         return 'unknown'
-# removed link type detection since all downloads will go through cobalt api.
 
 async def fetch_video_with_cobalt(url):
-    """Fetches a video using the Cobalt API."""
-    headers = {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-    }
-    data = {"url": url}
-
+    """使用Cobalt API获取视频下载链接"""
     try:
-        response = requests.post(COBALT_API_URL, headers=headers, json=data)
-        response.raise_for_status()  # Raises an exception for bad status codes
+        # 检查系统资源
+        can_proceed, message = resource_monitor.check_system_resources()
+        if not can_proceed:
+            logger.warning(message)
+            return None
+            
+        # 准备请求
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+        data = {"url": url}
+        
+        # 异步执行请求
+        loop = asyncio.get_event_loop()
+        response = await loop.run_in_executor(
+            None,
+            lambda: httpx.post(COBALT_API_URL, headers=headers, json=data, timeout=30)
+        )
+        
+        response.raise_for_status()
         return response.json()
-    except requests.exceptions.RequestException as e:
+    except Exception as e:
         logger.error(f"请求 Cobalt API 失败: {e}")
         return None
 
-async def download_video_from_url(url, user_cache_dir):
-    """下载视频从链接"""
+
+async def download_video_task(url, update: Update, context: ContextTypes.DEFAULT_TYPE, status_message):
+    """处理视频下载任务"""
+    user_id = update.effective_user.id
+    start_time = time.time()
+    success = False
+    
     try:
+        # 发送状态更新
+        await update_status_message(status_message, "正在获取视频信息...")
+        
+        # 从Cobalt API获取下载链接
         response = await fetch_video_with_cobalt(url)
         if not response or 'url' not in response:
-            logger.error("没有返回有效的下载链接 from cobalt api")
-            return None
-
+            raise Exception("无法获取有效的下载链接")
+        
         download_url = response['url']
-        file_uuid = str(uuid.uuid4())
-        video_path = os.path.join(user_cache_dir, f"{file_uuid}.mp4")
-        logger.info(f"开始下载视频，下载链接为: {download_url}")
-
-        # Download the video
-        with requests.get(download_url, stream=True, timeout=30) as r:
-            r.raise_for_status()  # Raise an exception for bad status codes
-            with open(video_path, 'wb') as f:
-                for chunk in r.iter_content(chunk_size=8192):
-                    f.write(chunk)
-
-        logger.info(f"下载成功到: {video_path}")
-        return video_path
-
+        
+        # 发送状态更新
+        await update_status_message(status_message, "正在下载视频...")
+        
+        # 执行下载
+        video_file = await download_manager.download_file(download_url, user_id)
+        if not video_file:
+            raise Exception("下载失败")
+            
+        # 检查视频完整性
+        if not await video_processor.check_video_integrity(video_file):
+            raise Exception("下载的视频文件已损坏")
+            
+        # 压缩视频（如果需要）
+        await update_status_message(status_message, "正在处理视频...")
+        processed_file = await video_processor.compress_video(video_file)
+        if not processed_file:
+            # 如果压缩失败，使用原始文件
+            processed_file = video_file
+            
+        # 生成唯一文件名
+        unique_id = str(uuid.uuid4())
+        final_file = os.path.join(DOWNLOAD_DIR, f"{unique_id}_{os.path.basename(processed_file)}")
+        os.rename(processed_file, final_file)
+        
+        success = True
+        processing_time = time.time() - start_time
+        logger.info(f"下载完成: {url}, 耗时: {processing_time:.2f}秒")
+        
+        return final_file
+        
     except Exception as e:
-        logger.exception(f"下载视频失败: {e}")
+        logger.error(f"下载任务失败: {e}")
         return None
-
-
-async def download_video_task(url,  update: Update, context: ContextTypes.DEFAULT_TYPE, status_message, max_retries=3):
-    user_id = update.effective_user.id
-    user_cache_dir = os.path.join(DOWNLOAD_DIR, str(user_id))
-    os.makedirs(user_cache_dir, exist_ok=True)
-
-    for attempt in range(max_retries):
-        try:
-            logger.info(f"Starting download attempt {attempt + 1} for URL: {url}")
-            video_file = await download_video_from_url(url, user_cache_dir)
-
-
-            if not video_file:
-                raise FileNotFoundError("Video file not found after download")
-
-            unique_id = str(uuid.uuid4())
-            new_video_file = os.path.join(DOWNLOAD_DIR, f"{unique_id}_{os.path.basename(video_file)}")
-            os.rename(video_file, new_video_file)
-
-            logger.info(f"Download completed successfully: {new_video_file}")
-            return new_video_file
-
-        except Exception as e:
-            logger.error(f"Download attempt {attempt + 1} failed: {str(e)}")
-            if attempt == max_retries - 1:
-                raise
-            await asyncio.sleep(5)
+        
+    finally:
+        # 更新性能指标
+        processing_time = time.time() - start_time
+        download_manager.update_metrics(success, processing_time)
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text('Welcome! Send me a video link to download.')
+    """处理/start命令"""
+    await update.message.reply_text('欢迎使用视频下载机器人！发送视频链接即可下载。')
+
+
+async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """显示系统状态统计信息"""
+    # 获取系统资源使用情况
+    resource_usage = resource_monitor.get_resource_usage()
+    
+    # 获取下载统计信息
+    download_stats = download_manager.get_metrics()
+    
+    # 格式化统计信息
+    stats_text = (
+        "📊 系统状态统计 📊\n\n"
+        f"CPU使用率: {resource_usage.get('cpu_percent', 0):.1f}%\n"
+        f"内存使用率: {resource_usage.get('memory_percent', 0):.1f}%\n"
+        f"可用内存: {resource_usage.get('memory_available', 0):.1f} MB\n\n"
+        f"总下载请求: {download_stats.get('total_downloads', 0)}\n"
+        f"成功下载: {download_stats.get('successful_downloads', 0)}\n"
+        f"失败下载: {download_stats.get('failed_downloads', 0)}\n"
+    )
+    
+    await update.message.reply_text(stats_text)
+
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """处理用户消息"""
     start_time = time.time()
     user = update.effective_user
     message_text = update.message.text
     status_message = None
-
-    # 检查用户是否可以开始新的下载
-    if not await manage_download_tasks(user.id):
-        await update.message.reply_text(
-            "您当前有太多正在进行的下载。请等待当前下载完成后再试。"
-        )
-        return
-
+    video_file = None
+    success = False
+    
     try:
-        logger.info(f"Received message from user {user.id} ({user.username}): {message_text}")
-
+        logger.info(f"收到来自用户 {user.id} ({user.username}) 的消息: {message_text}")
+        
+        # 检查是否为URL
         if not is_url(message_text):
-            with download_lock:
-                active_downloads[user.id] -= 1
-            await update.message.reply_text("Please send a valid video link.")
+            await update.message.reply_text("请发送有效的视频链接。")
             return
-
-        # url_type = get_url_type(message_text)
-        # if url_type == 'unknown':
-        #     with download_lock:
-        #         active_downloads[user.id] -= 1
-        #     await update.message.reply_text("Unsupported URL type. Please send a YouTube, Twitter, or Instagram URL.")
-        #     return
-
-        status_message = await update.message.reply_text("Starting download. Please wait...")
+            
+        # 检查用户是否可以开始新的下载
+        can_download, reason = await download_manager.can_start_download(user.id)
+        if not can_download:
+            await update.message.reply_text(reason)
+            return
+            
+        # 发送状态消息
+        status_message = await update.message.reply_text("开始处理下载请求...")
         
-        try:
-            # 使用线程池执行下载任务
-            download_start = time.time()
-            loop = asyncio.get_event_loop()
-            video_file = await loop.run_in_executor(
-                download_executor,
-                lambda: asyncio.run(download_video_task(
-                    message_text, update, context, status_message
-                ))
-            )
-            download_end = time.time()
-            download_duration = download_end - download_start
-
-            if not video_file:
-                raise Exception("Download failed")
-
-            # 记录发送开始时间
-            send_start = time.time()
-            await update_status_message(status_message, "正在发送视频...")
-            await send_video_with_retry(update.message, video_file)
-            send_end = time.time()
-            send_duration = send_end - send_start
+        # 执行下载任务
+        video_file = await download_video_task(message_text, update, context, status_message)
+        if not video_file:
+            raise Exception("下载处理失败")
             
-            # 计算总耗时
-            total_time = time.time() - start_time
-            
-            # 发送完成状态消息，包含时间统计
-            await status_message.edit_text(
-                f"下载完成并已发送文件！\n"
-                f"总耗时: {total_time:.2f}秒\n"
-                f"下载耗时: {download_duration:.2f}秒\n"
-                f"发送耗时: {send_duration:.2f}秒"
-            )
-            
-            # 记录详细日志
-            logger.info(
-                f"处理完成 - URL类型: all via cobalt \n"
-                f"总耗时: {total_time:.2f}秒\n"
-                f"下载耗时: {download_duration:.2f}秒\n"
-                f"发送耗时: {send_duration:.2f}秒"
-            )
-            
-        except Exception as e:
-            total_time = time.time() - start_time
-            logger.error(f"发送件失败: {str(e)}")
-            if status_message is not None:
-              await status_message.edit_text(
-                f"文件发送失败，请稍后重试。\n"
-                f"总耗时: {total_time:.2f}秒\n"
-                f"下载耗时: {download_duration:.2f}秒"
-            )
-        finally:
-            # 清理用户的下载计数
-            with download_lock:
-                active_downloads[user.id] = max(0, active_downloads.get(user.id, 1) - 1)
-            
-            # 启动异步清任务
-            if video_file and os.path.exists(video_file):
-                asyncio.create_task(cleanup_files(video_file))
-
-    except Exception as e:
-        logger.error(f"Error during download and send process: {str(e)}", exc_info=True)
-        if status_message is not None:
-            await status_message.edit_text(f"An error occurred. Please try again later.")
-        # 确保在错误情况下也减少下载计数
-        with download_lock:
-            active_downloads[user.id] = max(0, active_downloads.get(user.id, 1) - 1)
-
-async def compress_video_if_needed(video_file, max_size_mb=50):
-    """如果视频太大，尝试压缩"""
-    if await check_file_size(video_file, max_size_mb):
-        return video_file
+        # 发送视频
+        await update_status_message(status_message, "正在发送视频...")
+        await send_video_with_retry(update.message, video_file)
         
-    output_file = f"{os.path.splitext(video_file)[0]}_compressed.mp4"
-    try:
-        process = await asyncio.create_subprocess_exec(
-            'ffmpeg', '-i', video_file, 
-            '-c:v', 'libx264', '-crf', '28',
-            '-c:a', 'aac', '-b:a', '128k',
-            output_file,
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE
+        # 更新成功状态
+        success = True
+        total_time = time.time() - start_time
+        
+        # 发送完成状态消息
+        status_text = (
+            f"下载完成并已发送文件！\n"
+            f"总耗时: {total_time:.2f}秒"
         )
-        await process.communicate()
+        await status_message.edit_text(status_text)
         
-        if await check_file_size(output_file, max_size_mb):
-            os.remove(video_file)
-            return output_file
-        else:
-            os.remove(output_file)
-            return video_file
+        # 记录详细日志
+        logger.info(f"处理完成 - URL: {message_text}\n{status_text}")
+        
     except Exception as e:
-        logger.error(f"压缩视频失败: {str(e)}")
-        return video_file
+        total_time = time.time() - start_time
+        error_message = f"处理失败: {str(e)}"
+        logger.error(error_message)
+        
+        if status_message:
+            await status_message.edit_text(f"文件处理失败，请稍后重试。\n总耗时: {total_time:.2f}秒")
+            
+    finally:
+        # 启动异步清理任务
+        if video_file and os.path.exists(video_file):
+            asyncio.create_task(cleanup_files(video_file))
 
-async def check_file_size(file_path, max_size_mb=50):
-    """检查文件大小是否超过限制"""
-    if not os.path.exists(file_path):
-        logger.error(f"文件不存在: {file_path}")
-        return False
-    file_size = os.path.getsize(file_path) / (1024 * 1024)  # 转换为 MB
-    logger.info(f"文件大小: {file_size:.2f}MB")
-    return file_size <= max_size_mb
 
-@backoff.on_exception(
-    backoff.expo,
-    (TimedOut, NetworkError),
-    max_tries=3,
-    max_time=300
-)
-async def send_video_with_retry(message, video_file):
+async def send_video_with_retry(message, video_file, max_retries=3):
     """带重试机制的视频发送函数"""
-    with open(video_file, 'rb') as video:
-        return await message.reply_document(
-            document=video,
-            read_timeout=30,
-            write_timeout=30,
-            connect_timeout=30,
-            pool_timeout=30
-        )
+    for attempt in range(max_retries):
+        try:
+            with open(video_file, 'rb') as video:
+                await message.reply_video(
+                    video=video,
+                    filename=os.path.basename(video_file),
+                    caption="下载完成！"
+                )
+            return True
+        except (TimedOut, NetworkError) as e:
+            if attempt < max_retries - 1:
+                logger.warning(f"发送视频失败，正在重试 ({attempt+1}/{max_retries}): {e}")
+                await asyncio.sleep(2)  # 短暂延迟后重试
+            else:
+                logger.error(f"发送视频失败，已达到最大重试次数: {e}")
+                raise
+        except Exception as e:
+            logger.error(f"发送视频时发生错误: {e}")
+            raise
+
 
 async def update_status_message(status_message, text):
-    """更新状态消息的助函数"""
-    try:
-        await status_message.edit_text(text)
-    except Exception as e:
-        logger.warning(f"更新状态消息失败: {str(e)}")
+    """更新状态消息的辅助函数"""
+    if status_message:
+        try:
+            await status_message.edit_text(text)
+        except Exception as e:
+            logger.error(f"更新状态消息失败: {e}")
 
-# 添加清理任务函数
-async def cleanup_files(file_path: str, delay: int = 60):
-    """
-    异步清理文件
-    :param file_path: 要删除的文件路径
-    :param delay: 延迟删除的秒数，默认60秒
-    """
+
+async def cleanup_files(file_path, delay=60):
+    """异步清理文件"""
     try:
-        await asyncio.sleep(delay)  # 等待一定时间后再删除
+        await asyncio.sleep(delay)
         if os.path.exists(file_path):
             os.remove(file_path)
-            logger.info(f"已清理文件: {file_path}")
+            logger.info(f"已清理临时文件: {file_path}")
     except Exception as e:
-        logger.error(f"清理文件失败 {file_path}: {str(e)}")
+        logger.error(f"清理文件失败: {e}")
 
-# 添加下载任务管理函数
-async def manage_download_tasks(user_id: int) -> bool:
-    """
-    管理用户下载任务
-    :param user_id: 用户ID
-    :return: 是否可以开始新的下载
-    """
-    with download_lock:
-        # 清理已完成的任务
-        active_downloads.update({
-            uid: count for uid, count in active_downloads.items()
-            if count > 0
-        })
-        
-        # 检查用户当前的下载数量
-        current_downloads = active_downloads.get(user_id, 0)
-        if current_downloads >= 2:  # 每个用户最多同时下载2个视频
-            return False
+
+async def scheduled_cleanup():
+    """定期清理任务"""
+    with scheduled_task_lock:
+        try:
+            # 清理旧文件
+            await download_manager.cleanup_old_files(max_age_hours=24)
             
-        # 增加用户的下载计数
-        active_downloads[user_id] = current_downloads + 1
-        return True
+            # 检查系统资源
+            resource_usage = resource_monitor.get_resource_usage()
+            logger.info(f"系统资源状态 - CPU: {resource_usage.get('cpu_percent', 0):.1f}%, "
+                       f"内存: {resource_usage.get('memory_percent', 0):.1f}%")
+            
+        except Exception as e:
+            logger.error(f"定期清理任务失败: {e}")
 
-# 添加定期清理函数
-async def cleanup_download_counts():
-    """定期清理过期的下载计数"""
+
+async def run_scheduled_tasks(app):
+    """运行定期任务"""
     while True:
-        await asyncio.sleep(300)  # 每5分钟清理一次
-        with download_lock:
-            # 清理计数为0的用户
-            active_downloads.clear()
-        logger.info("已清理下载计数")
+        await scheduled_cleanup()
+        await asyncio.sleep(3600)  # 每小时运行一次
 
-def main() -> None:
+
+async def main():
+    """主函数"""
+    # 确保只有一个机器人实例运行
+    instance_manager = SingleInstanceManager()
+    if not instance_manager.ensure_single_instance():
+        logger.error("另一个机器人实例已在运行，本实例将退出")
+        sys.exit(1)
+        
     try:
-        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+        # 配置自定义连接池和超时设置
+        request = HTTPXRequest(
+            connection_pool_size=8,
+            read_timeout=30.0,
+            write_timeout=30.0,
+            connect_timeout=30.0,
+        )
         
-        def create_ssl_connection(*args, **kwargs):
-            sock = socket.create_connection(*args, **kwargs)
-            ssl_sock = ssl_context.wrap_socket(sock, server_hostname=kwargs.get("server_hostname"))
-            return ssl_sock
+        # 创建应用
+        application = Application.builder().token(TOKEN).request(request).build()
         
-        transport = httpx.AsyncHTTPTransport()
-        
-        http_client = httpx.AsyncClient(verify=True)
-        
-        http_request = HTTPXRequest()
-        
-        application = Application.builder().token(TOKEN).request(http_request).build()
+        # 添加命令处理器
         application.add_handler(CommandHandler("start", start))
+        application.add_handler(CommandHandler("stats", stats))
+        
+        # 添加消息处理器
         application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-
-        # 启动清理任务
-        loop = asyncio.get_event_loop()
-        loop.create_task(cleanup_download_counts())
-
-        # 运行应用
-        application.run_polling()
+        
+        # 启动定期任务
+        asyncio.create_task(run_scheduled_tasks(application))
+        
+        # 启动机器人
+        await application.initialize()
+        await application.start()
+        await application.updater.start_polling()
+        
+        logger.info("机器人已启动")
+        
+        # 保持运行 - 兼容不同版本的python-telegram-bot
+        try:
+            await application.idle()
+        except AttributeError:
+            # 如果没有idle方法，使用无限循环保持运行
+            while True:
+                await asyncio.sleep(3600)
+        
+    except Exception as e:
+        logger.error(f"启动失败: {e}")
     finally:
-        download_executor.shutdown(wait=True)
+        # 确保在程序结束时清理资源
+        if 'instance_manager' in locals():
+            instance_manager.cleanup()
+
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
