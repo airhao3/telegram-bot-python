@@ -17,6 +17,8 @@ services:
             - bot-network
 
     telegram-bot:
+        # 可以选择使用预构建镜像或本地构建
+        image: ghcr.io/airhao3/telegram-video-bot:latest
         build:
             context: .
             dockerfile: Dockerfile

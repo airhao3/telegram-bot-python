@@ -54,9 +54,19 @@
 3. 部署方式（二选一）：
 
    #### 方式一：使用Docker Compose（推荐）
+   有两种使用Docker Compose的方式：
+   
+   **A. 直接使用预构建镜像（最简单）**
    ```bash
-   # 启动所有服务（Telegram机器人、Cobalt API、Watchtower）
+   # 从远程拉取镜像并启动所有服务
+   docker-compose pull
    docker-compose up -d
+   ```
+   
+   **B. 本地构建镜像**
+   ```bash
+   # 在本地构建镜像并启动所有服务
+   docker-compose up -d --build
    ```
 
    #### 方式二：单独构建
