@@ -22,12 +22,11 @@
 
 ### 系统特性
 - 模块化架构设计
-- 系统资源监控与管理
-- 高效并发下载处理（每用户最多3个并发任务）
+- 高效多线程下载处理
 - 视频文件完整性检查
 - 自动清理临时文件
 - 智能文件大小管理（最大支持2GB）
-- 优雅的错误处理与重试机制
+- 优雅的错误处理
 - 用户友好的状态更新提示
 - 单实例运行保证，防止冲突
 
@@ -49,10 +48,18 @@
 2. 配置环境变量：
    ```bash
    cp .env.example .env
-   # 编辑 .env 文件，填入必要的配置信息
+   # 编辑 .env 文件，填入必要的配置信息（BOT_TOKEN等）
    ```
 
-3. 构建并启动：
+3. 部署方式（二选一）：
+
+   #### 方式一：使用Docker Compose（推荐）
+   ```bash
+   # 启动所有服务（Telegram机器人、Cobalt API、Watchtower）
+   docker-compose up -d
+   ```
+
+   #### 方式二：单独构建
    ```bash
    # 构建 Docker 镜像
    docker build -t telegram-video-bot .
@@ -68,6 +75,22 @@
 
 ### 维护管理
 
+#### 使用Docker Compose的维护命令（推荐）
+```bash
+# 查看运行日志
+docker-compose logs -f telegram-video-bot
+docker-compose logs -f cobalt-api
+
+# 更新所有服务
+docker-compose pull
+docker-compose up -d
+
+# 停止/启动所有服务
+docker-compose stop
+docker-compose start
+```
+
+#### 使用单容器的维护命令
 ```bash
 # 查看运行日志
 docker logs -f telegram-video-bot
@@ -80,6 +103,25 @@ docker restart telegram-video-bot
 docker stop telegram-video-bot
 docker start telegram-video-bot
 ```
+
+### Docker Compose配置说明
+
+项目提供的`docker-compose.yml`文件包含三个服务：
+
+1. **telegram-video-bot**：Telegram视频下载机器人
+   - 使用本地Dockerfile构建
+   - 挂载下载目录到宿主机
+   - 从.env文件读取环境变量
+
+2. **cobalt-api**：视频链接解析服务
+   - 使用官方Docker镜像
+   - 提供视频下载链接解析功能
+
+3. **watchtower**：自动更新服务
+   - 监控并自动更新cobalt-api容器
+   - 保持服务始终为最新版本
+
+这些服务通过自定义网络`bot-network`相互通信。机器人通过`COBALT_API_URL`环境变量访问Cobalt API服务。
 
 ## 使用说明
 
@@ -96,23 +138,34 @@ docker start telegram-video-bot
 ### 注意事项
 - 视频大小限制为 2GB（可在配置中调整）
 - 下载较大视频时会自动压缩
-- 每个用户同时最多处理 3 个下载任务
 - 临时文件会在下载完成后自动清理
-- 系统内存使用率超过75%时会暂停新任务
 
 
 ## 更新日志
 
+### [2.2.0] - 2025-03-10
+- 代码重构和简化：
+  - 简化下载管理器，移除复杂的锁机制
+  - 优化多线程下载处理
+  - 改进错误处理机制
+  - 使用临时文件确保下载完整性
+- 用户系统优化：
+  - 完善积分系统
+  - 添加订阅用户特权
+  - 优化下载限制逻辑
+- 性能改进：
+  - 提升下载稳定性
+  - 优化内存使用
+  - 改进异步处理
+
 ### [2.1.0] - 2025-03-09
 - 代码重构：模块化架构设计
-  - 添加资源监控模块
   - 添加下载管理模块
   - 添加视频处理模块
   - 添加单实例管理器
 - 性能优化：
-  - 增加每用户并发下载数至3个
   - 设置最大文件大小限制为2GB
-  - 添加内存使用监控机制
+  - 优化下载处理逻辑
 - 错误处理改进
 - 用户体验增强
 

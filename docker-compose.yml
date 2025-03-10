@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+    cobalt-api:
+        image: ghcr.io/imputnet/cobalt:10
+        init: true
+        read_only: true
+        restart: unless-stopped
+        container_name: cobalt-api
+        ports:
+            - "9999:9000/tcp"
+        environment:
+            API_URL: "http://localhost:9999"
+        labels:
+            - com.centurylinklabs.watchtower.scope=cobalt
+        networks:
+            - bot-network
+
+    telegram-bot:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: telegram-video-bot
+        restart: unless-stopped
+        volumes:
+            - ./download:/app/download
+        env_file:
+            - ./.env
+        depends_on:
+            - cobalt-api
+        environment:
+            - COBALT_API_URL=http://cobalt-api:9000
+        networks:
+            - bot-network
+
+    watchtower:
+        image: ghcr.io/containrrr/watchtower
+        restart: unless-stopped
+        command: --cleanup --scope cobalt --interval 900 --include-restarting
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        networks:
+            - bot-network
+
+networks:
+    bot-network:
+        driver: bridge
